@@ -11,4 +11,4 @@ hahaha 你好， 这一章是mooc郭炜程序设计与算法课程的笔记。
    :maxdepth: 1
    :glob:
 
-   ../cp01/*
+   ../cp02/*
