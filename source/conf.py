@@ -103,10 +103,10 @@ htmlhelp_basename = 'leo\'s notes'
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'python3-cookbook', u'《Python编程时光》',
-     [u'小明同学'], 1)
-]
+# man_pages = [
+#     ('index', 'python3-cookbook', u'《Python编程时光》',
+#      [u'小明同学'], 1)
+# ]
 
 # If true, show URL addresses after external links.
 #man_show_urls = False
@@ -117,11 +117,11 @@ man_pages = [
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [
-  ('index', 'Python-Time', u'《Python编程时光》',
-   u'小明同学', 'Python-Time', '《Python编程时光》',
-   'Miscellaneous'),
-]
+# texinfo_documents = [
+#   ('index', 'Python-Time', u'《Python编程时光》',
+#    u'小明同学', 'Python-Time', '《Python编程时光》',
+#    'Miscellaneous'),
+# ]
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
