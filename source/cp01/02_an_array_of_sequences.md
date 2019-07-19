@@ -1,6 +1,6 @@
 # 2 An Array of Sequences
 
-## Overview of Build-In Sequences
+## 2.1 Overview of Build-In Sequences
 
 我们可以从两个角度对序列进行分类。一是从存储对象的机制来分类
 
@@ -14,7 +14,7 @@
 - 可变序列（mutable sequences）: list, bytearray, array.array, collections.deque, memoryivew
 - 不可变序列（immutable sequences）: tuple, str, bytes
 
-## List Comprehensions and Generator Expressions
+## 2.2 List Comprehensions and Generator Expressions
 
 listcomps是的目的是生成列表的，如果要实现其他的功能，还是建议用for循环。
 
@@ -97,7 +97,7 @@ array('I', [36, 65509])
 
 genexps的最大一个特点是它不是在内存中一次性生成所有元素，而是迭代一次生成一个
 
-## Tuples Are Not Just Immutable Lists
+## 2.3 Tuples Are Not Just Immutable Lists
 
 tuple有两个作用：一是作为无字段名的记录，二是作为不可变的列表。第一个作用往往被人忽视。
 
