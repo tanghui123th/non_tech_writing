@@ -13,4 +13,6 @@ Contents:
    :maxdepth: 2
    :glob:
    
+   preface
    chapters/*
+   about
