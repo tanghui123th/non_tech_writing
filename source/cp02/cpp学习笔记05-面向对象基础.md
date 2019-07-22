@@ -120,15 +120,23 @@ public:
         real = i; imag = 0;
     }
     Complex(double r, double i){real = r; imag = i;}
-}
+};
 
 int main(){
     Complex c1(7, 8);
     Complex c2 = 12;    // 调用类型转换构造函数
     c1 = 9;    // 9被自动转换成一个临时Complex对象，然后赋值给c1
     cout << c1.real << ", " << c1.imag << endl;
-    return 0l
+    return 0;
 }
+```
+
+输出：
+
+```
+IntConstructor called
+IntConstructor called
+9, 0
 ```
 
 ## 5.5 析构函数
