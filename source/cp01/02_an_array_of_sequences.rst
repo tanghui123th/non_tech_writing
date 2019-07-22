@@ -235,3 +235,49 @@ namedtuple的类继承自tuple，继承的属性中有3个最有用
    country: IN
    population: 21.935
    coordinates: LatLong(lat=28.613889, long=77.208889)
+
+2.4 Slicing
+-----------
+
+所有序列类型的对象都能进行切片。
+
+Why Slices and Range Exclude the Last Item
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+-  可以一眼看出切片或范围的长度，如\ ``range(3)`` ``my_list[:3]``
+-  当起始和结束都给出时，长度就是\ ``stop - start``
+-  同一个位置把序列分成两部分而不重叠，如\ ``my_list[:x]``\ 和\ ``my_list[x:]``
+
+Slice Objects
+~~~~~~~~~~~~~
+
+我们在使用切片时，实际上是创建了一个切片对象\ ``slice(a, b, c)``\ 。表达式\ ``seq[start:stop:step]``\ 会被解释为\ ``seq.__getitem__(slice(start, stop, step))``
+
+.. code:: python
+
+   invoice = """
+   0.....6.................................40...........52...55........
+   1909  Pimoroni PiBrella                        $17.50    3    $52.50
+   1489  6mm Tactile Switch x20                    $4.95    2     $9.90
+   1510  Panavise Jr. - PV-201                    $28.00    1    $28.00
+   1601  PiTFT Mini Kit 320x240                   $34.95    1    $34.95
+   """
+
+   SYU = slice(0, 6)
+   DESCRIPTION = slice(6, 40)
+   UNIT_PRICE = slice(40, 52)
+   QUANTITY = slice(52, 55)
+   ITEM_TOTAL = slice(55, None)
+
+   line_items = invoice.split('\n')[2:]
+   for item in line_items:
+       print(item[UNIT_PRICE], item[DESCRIPTION])
+
+输出
+
+::
+
+          $17.5 Pimoroni PiBrella                 
+           $4.9 6mm Tactile Switch x20            
+          $28.0 Panavise Jr. - PV-201             
+          $34.9 PiTFT Mini Kit 320x240
