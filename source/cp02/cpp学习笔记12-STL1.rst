@@ -193,7 +193,7 @@ STL的基本概念
 双向迭代器
 ~~~~~~~~~~
 
-若p和p1是双向迭代器，则可以对p、p1进行一下操作：
+若p和p1是双向迭代器，则可以对p、p1进行以下操作：
 
 -  ++p, p++：使p指向容器中下一个元素
 -  –p, p–：使p指向容器中上一个元素
@@ -204,7 +204,7 @@ STL的基本概念
 随机访问迭代器
 ~~~~~~~~~~~~~~
 
-若p和p1是随机访问迭代器，则可对p、p1进行一下操作：
+若p和p1是随机访问迭代器，则可对p、p1进行以下操作：
 
 -  双向迭代器的所有操作
 -  p += i 将p向后移动i个元素
@@ -283,16 +283,22 @@ vector
        int a[5] = {1,2,3,4,5};
        vector<int> v(a, a+5);
        cout << "1) " << v.end() - v.begin() << endl;
+
        cout << "2) "; PrintVector(v.begin(), v.end());
+
        v.insert(v.begin()+2, 13);
        cout << "3) "; PrintVector(v.begin(), v.end());
+
        v.erase(v.begin()+2);
        cout << "4) "; PrintVector(v.begin(), v.end());
+
        vector<int> v2(4, 100);
        v2.insert(v2.begin(), v.begin()+1, v.begin()+3);
        cout << "5) "; PrintVector(v2.begin(), v2.end());
+
        v.erase(v.begin()+1, v.begin()+3);
        cout << "6) "; PrintVector(v.begin(), v.end());
+
        return 0;
    }
 
@@ -492,9 +498,8 @@ list
    3) 立方和：3025
    4) 4次方和：25333
 
-STL中的函数对象类模板
-
-equal_to, greater, less等。在头文件\ ``<functional>``
+STL中的函数对象类模板：equal_to, greater,
+less等。在头文件\ ``<functional>``
 
 我们来看看greater
 
