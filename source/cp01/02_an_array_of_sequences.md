@@ -531,3 +531,147 @@ haystack ->  1  4  5  6  8 12 15 20 21 23 23 26 29 30
 >>> [grade(score) for score in [33,99,77,70,89,90,100]]
 ['F', 'A', 'C', 'C', 'B', 'A', 'A']
 ```
+
+### Inserting with bisect.insort
+
+同`bisect`，`insort`也有一个`insort_left`使用`bisect_left`来找到相同情况下左边的索引插入。
+
+```python
+import bisect
+import random
+
+SIZE = 7
+
+random.seed(7)
+
+my_list = []
+for i in range(SIZE):
+    new_item = random.randrange(SIZE*2)
+    bisect.insort(my_list, new_item)
+    print('%2d ->' % new_item, my_list)
+```
+
+```python
+ 5 -> [5]
+ 2 -> [2, 5]
+ 6 -> [2, 5, 6]
+10 -> [2, 5, 6, 10]
+ 0 -> [0, 2, 5, 6, 10]
+ 1 -> [0, 1, 2, 5, 6, 10]
+13 -> [0, 1, 2, 5, 6, 10, 13]
+```
+
+## 2.9 When a List is Not the Answer
+
+下面介绍几种在特定场合可以替代列表的可变序列
+
+> 如果需要大量的包含检查（判断元素是否在其中），可以用set。set包含检查速度很快。但是set不是序列。
+
+### Arrays
+
+array存储的是按c语言类型的字节，而list存储的是对象。
+
+```python
+>>> from array import array
+>>> from random import random
+>>> floats = array('d', (random() for i in range(10**7))) # a million floats, 这里array第二个参数是个生成器
+>>> floats[-1]
+0.4139464046747857
+>>> with open('floats.bin', 'wb') as fp:
+...     floats.tofile(fp)
+... 
+>>> floats2 = array('d')
+>>> with open('floats.bin', 'rb') as fp:
+...     floats2.fromfile(fp, 10**7)
+... 
+>>> floats2[-1]
+0.4139464046747857
+>>> floats == floats2
+True
+```
+
+`array.tofile`和`array.fromfile`可以非常快速方便的操作。
+
+### Memory Views
+
+mevorview对象是一个共享内存的序列
+
+```python
+>>> numbers = array.array('h', [-2, -1, 0, 1, 2])   # 'h' short int 类型
+>>> memv = memoryview(numbers)
+>>> len(memv)
+5
+>>> memv[0]
+-2
+>>> memv_oct = memv.cast('B')           # 'B' unsigned char 类型
+>>> memv_oct.tolist()
+[254, 255, 255, 255, 0, 0, 1, 0, 2, 0]  # 注意字节顺序在每一个元素中是反着的
+>>> memv_oct[5] = 4
+>>> numbers
+array('h', [-2, -1, 1024, 1, 2])        # 4的二进制位是100，这时第三个元素的二进制形式是 00000000 00000100 而字节顺序是反的，所以就是2^10即1024
+```
+
+### NumPy and SciPy
+
+NumPy可以方便的操作多维数组和矩阵。SciPy是基于NumPy的一个库，可以很方便的进行线性代数和统计学方面的计算。
+
+```python
+>>> import numpy
+>>> a = numpy.arange(12)
+>>> a
+array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
+>>> type(a)
+<class 'numpy.ndarray'>
+>>> a.shape
+(12,)
+>>> a.shape = 3,4
+>>> a
+array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+>>> a[2]
+array([ 8,  9, 10, 11])
+>>> a[2,1]
+9
+>>> a[:, 1]
+array([1, 5, 9])
+>>> a.transpose()
+array([[ 0,  4,  8],
+       [ 1,  5,  9],
+       [ 2,  6, 10],
+       [ 3,  7, 11]])
+```
+
+### Deques and Other Queues
+
+list虽然在右边插入和删除很快，但是要在左边插入删除的话，要移动整个序列。deque则可以很快地操作两端的元素。deque设置了最大长度的话，超过长度的插入元素会把元素从另一端挤出去。
+
+```>>> from collections import deque
+>>> dq = deque(range(10), maxlen=10)
+>>> dq
+deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+>>> dq.rotate(3)
+>>> dq
+deque([7, 8, 9, 0, 1, 2, 3, 4, 5, 6], maxlen=10)
+>>> dq.rotate(-4)
+>>> dq
+deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], maxlen=10)
+>>> dq.appendleft(-1)
+>>> dq
+deque([-1, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+>>> dq.extend([11,22,33])
+>>> dq
+deque([3, 4, 5, 6, 7, 8, 9, 11, 22, 33], maxlen=10)
+>>> dq.extendleft([10,20,30,40])
+>>> dq
+deque([40, 30, 20, 10, 3, 4, 5, 6, 7, 8], maxlen=10)
+```
+
+deque的操作是线程安全的，在多线程环境下可以放心使用。
+
+其他几个实现队列的标准库：
+
+- queue：有类Queue、LiFoQueue、PriorityQueue。这些是为多线程编程设计的。这些类都是线程安全的。且如果已满的话，新插入的元素会等待，直到其他线程把queue的空间又空出来。
+- multiprocessing：有类Queue，为多进程编程而设计。
+- asynio：为异步编程设计。
+- heapq：用来进行堆的操作。
