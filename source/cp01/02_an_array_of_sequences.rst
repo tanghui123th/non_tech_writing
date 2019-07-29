@@ -681,7 +681,27 @@ Deques and Other Queues
 
 list虽然在右边插入和删除很快，但是要在左边插入删除的话，要移动整个序列。deque则可以很快地操作两端的元素。deque设置了最大长度的话，超过长度的插入元素会把元素从另一端挤出去。
 
-``>>> from collections import deque >>> dq = deque(range(10), maxlen=10) >>> dq deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10) >>> dq.rotate(3) >>> dq deque([7, 8, 9, 0, 1, 2, 3, 4, 5, 6], maxlen=10) >>> dq.rotate(-4) >>> dq deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], maxlen=10) >>> dq.appendleft(-1) >>> dq deque([-1, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10) >>> dq.extend([11,22,33]) >>> dq deque([3, 4, 5, 6, 7, 8, 9, 11, 22, 33], maxlen=10) >>> dq.extendleft([10,20,30,40]) >>> dq deque([40, 30, 20, 10, 3, 4, 5, 6, 7, 8], maxlen=10)``
+::
+
+   >>> from collections import deque
+   >>> dq = deque(range(10), maxlen=10)
+   >>> dq
+   deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+   >>> dq.rotate(3)
+   >>> dq
+   deque([7, 8, 9, 0, 1, 2, 3, 4, 5, 6], maxlen=10)
+   >>> dq.rotate(-4)
+   >>> dq
+   deque([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], maxlen=10)
+   >>> dq.appendleft(-1)
+   >>> dq
+   deque([-1, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
+   >>> dq.extend([11,22,33])
+   >>> dq
+   deque([3, 4, 5, 6, 7, 8, 9, 11, 22, 33], maxlen=10)
+   >>> dq.extendleft([10,20,30,40])
+   >>> dq
+   deque([40, 30, 20, 10, 3, 4, 5, 6, 7, 8], maxlen=10)
 
 deque的操作是线程安全的，在多线程环境下可以放心使用。
 

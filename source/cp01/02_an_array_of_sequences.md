@@ -646,7 +646,8 @@ array([[ 0,  4,  8],
 
 list虽然在右边插入和删除很快，但是要在左边插入删除的话，要移动整个序列。deque则可以很快地操作两端的元素。deque设置了最大长度的话，超过长度的插入元素会把元素从另一端挤出去。
 
-```>>> from collections import deque
+```
+>>> from collections import deque
 >>> dq = deque(range(10), maxlen=10)
 >>> dq
 deque([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], maxlen=10)
