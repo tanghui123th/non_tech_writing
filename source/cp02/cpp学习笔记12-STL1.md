@@ -210,7 +210,7 @@ int main(){
 | map/multimap | 双向        |
 | stack        | 不支持迭代器    |
 | queue        | 不支持迭代器    |
-| queue        | 不支持迭代器    |
+| priority_queue        | 不支持迭代器    |
 
 > 有些算法，如sort， binary_search需要通过随机访问迭代器来访问容器中的元素，那么list以及关联容器就不支持该算法。
 

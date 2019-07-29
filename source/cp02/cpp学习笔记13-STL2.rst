@@ -165,3 +165,229 @@ set
 
 没有重复元素。（重复的定义：\ ``a < b``,
 ``b < a``\ 皆不成立）。插入重复元素时，自动忽略。
+
+set使用的例子
+
+.. code:: cpp
+
+   #include<iostream>
+   #include<set>
+   using namespace std;
+
+   int main(){
+       typedef set<int>::iterator IT;
+       int a[5] = {3, 4, 6, 1, 2};
+       set<int> st(a, a + 5);
+       pair<IT, bool> result;
+       result = st.insert(5);  // insert返回一个pair，first类型是迭代器，second是bool，插入成功为true，否则为false
+       if(result.second)
+           cout << *result.first << " inserted" << endl;
+       if(st.insert(5).second) cout << *result.first << " inserted again" << endl;
+       else cout << *result.first << " already exists" << endl;
+
+       pair<IT, IT> bounds = st.equal_range(4);
+       cout << *bounds.first << ", " << *bounds.second << endl;
+       return 0;
+   }
+
+输出
+
+::
+
+   5 inserted
+   5 already exists
+   4, 5
+
+13.2 map和multimap
+------------------
+
+multimap
+~~~~~~~~
+
+定义如下
+
+.. code:: cpp
+
+   template<class Key, class T, class Pred = less<Key>, class A = allocator<T>>
+   class multimap{
+       ...
+       typdef pair<const Key, T> value_type;
+       ...
+   };
+
+-  multimap中的元素有\ ``<关键字，值>``\ 组成，每个元素是一个pair对象，关键字就是first成员变量，其类型是Key。
+-  multimap中允许多个元素的关键字相同。元素按照first成员变量从小到大排列。缺省情况下用less定义小于关系。
+
+一个multimap的例子
+
+.. code:: cpp
+
+   #include<iostream>
+   #include<map>
+   using namespace std;
+
+   int main(){
+       typedef multimap<int, double, less<int>> mmid;
+       mmid pairs;
+       cout << "1) " << pairs.count(15) << endl;
+
+       pairs.insert(mmid::value_type(15, 2.7));
+       pairs.insert(mmid::value_type(15, 99.3));
+       cout << "2) " << pairs.count(15) << endl;  // 求key等于15的元素个数
+
+       pairs.insert(mmid::value_type(30, 111.11));
+       pairs.insert(mmid::value_type(10, 22.22));
+       pairs.insert(mmid::value_type(25, 33.333));
+       pairs.insert(mmid::value_type(20, 9.3));
+       for(mmid::const_iterator i = pairs.begin(); i != pairs.end(); i++){
+           cout << "(" << i->first << ", " << i->second << ")" << ", ";
+       }
+       cout << endl;
+   }
+
+输出
+
+::
+
+   1) 0
+   2) 2
+   (10, 22.22), (15, 2.7), (15, 99.3), (20, 9.3), (25, 33.333), (30, 111.11), 
+
+map
+~~~
+
+定义如下
+
+.. code:: cpp
+
+   template<class Key, class T, class Pred = less<Key>, class A = allocator<T>>
+   class map{
+       ...
+       typdef pair<const Key, T> value_type;
+       ...
+   };
+
+map中的元素都是pair模板类对象。map不同于multimap两点：
+
+-  关键字（first）各不相同。
+-  有[]成员函数。
+
+``paris[key]``\ 返回对关键字key的元素的值（second成员变量）的引用。若没有关键字为key的元素，则会往pairs中插入一个关键字为key的元素，并返回其值得引用。
+
+.. code:: cpp
+
+   #include<iostream>
+   #include<map>
+   using namespace std;
+
+   template<class Key, class Value>
+   ostream &operator << (ostream &o, const pair<Key, Value> &p){
+       o << "(" << p.first << ", " << p.second << ")";
+       return o;
+   }
+
+   int main(){
+       typedef map<int, double, less<int>> mmid;
+       mmid pairs;
+
+       cout << "1) " << pairs.count(15) << endl;
+
+       pairs.insert(mmid::value_type(15, 2.7));
+       pairs.insert(make_pair(15, 99.3));  // 用make_pair生成一个pair对象，插入会失败
+       cout << "2) " << pairs.count(15) << endl;
+
+       pairs.insert(mmid::value_type(20, 9.3));
+       mmid::iterator i;
+       cout << "3) " ;
+       for(i = pairs.begin(); i != pairs.end(); i++){
+           cout << *i << ", ";
+       }
+       cout << endl;
+
+       cout << "4) ";
+       int n = pairs[40];
+       for(i = pairs.begin(); i != pairs.end(); i++)
+           cout << *i << ", ";
+       cout << endl;
+
+       cout << "5) ";
+       pairs[15] = 6.28;
+       for(i = pairs.begin(); i != pairs.end(); i++)
+           cout << *i << ", ";
+       cout << endl;
+   }
+
+输出
+
+::
+
+   1) 0
+   2) 1
+   3) (15, 2.7), (20, 9.3), 
+   4) (15, 2.7), (20, 9.3), (40, 0), 
+   5) (15, 6.28), (20, 9.3), (40, 0),
+
+13.3 容器适配器
+---------------
+
+容器适配器是没有迭代器的，因此stl中的算法不能作用于容器适配器，只能使用容器适配器自己的成员函数。
+
+stack
+~~~~~
+
+stack内部可以用vecor、list、deque实现。缺省情况下是用deque实现的。用vector和deque实现，比用list实现性能好。
+
+.. code:: cpp
+
+   template<class T, class Cont = deque<T>>
+   class stack{
+       ...
+   };
+
+queue
+~~~~~
+
+和stack基本类似。可用list和vector实现，缺省情况下用deque实现。
+
+priority_queue
+~~~~~~~~~~~~~~
+
+.. code:: cpp
+
+   template<class T, class Container = vector<T>, class Compare = less<T>>
+   class priority_queue;
+
+可以用vector和deque实现，缺省情况下用vector实现。
+
+priority_queue通常用堆排序基数实现，保证最大的元素总是排在最前面。默认比较器是less。push，pop时间复杂度是O(logn)，top()时间复杂度是O(1)。
+
+.. code:: cpp
+
+   #include<queue>
+   #include<iostream>
+   using namespace std;
+
+   int main(){
+       priority_queue<double> pq1;
+       pq1.push(3.2); pq1.push(9.8); pq1.push(9.8); pq1.push(5.4);
+       while(!pq1.empty()){
+           cout << pq1.top() << " ";
+           pq1.pop();
+       }
+
+       cout << endl;
+       priority_queue<double, vector<double>, greater<double>> pq2; // 为了写第三个参数，必须也写第二个参数
+       pq2.push(3.2); pq2.push(9.8); pq2.push(9.8); pq2.push(5.4);
+       while(!pq2.empty()){
+           cout << pq2.top() << " ";
+           pq2.pop();
+       }
+       return 0;
+   }
+
+输出
+
+::
+
+   9.8 9.8 5.4 3.2 
+   3.2 5.4 9.8 9.8
