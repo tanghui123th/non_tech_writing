@@ -7,7 +7,7 @@
 - 容器类序列（container sequences）:list, tuple, collections.deque
 - 直接序列（flat sequences）:str, bytes, bytearray, memoryview, array.array
 
-容器类序列保存的是对象的引用，而直接序列保存的是对象本身
+`container sequences`可以保存任意类型的对象，当然也包括自身类型的对象。`flat sequences`则只能保存基本类型，如整形、浮点型、字符型等。这也意味着`container sequences`可以嵌套，而`flat sequences`是无法嵌套的。
 
 二是从可变性来分类：
 
@@ -16,7 +16,7 @@
 
 ## 2.2 List Comprehensions and Generator Expressions
 
-listcomps是的目的是生成列表的，如果要实现其他的功能，还是建议用for循环。
+listcomps是的目的是生成列表，如果要实现其他的功能，还是建议用for循环。
 
 > [], {}, ()这三种括号中的换行是会被解释器忽略的
 
@@ -565,6 +565,11 @@ for i in range(SIZE):
 
 下面介绍几种在特定场合可以替代列表的可变序列
 
+- array
+- memorview
+- numpy中的数组
+- 几种queue
+
 > 如果需要大量的包含检查（判断元素是否在其中），可以用set。set包含检查速度很快。但是set不是序列。
 
 ### Arrays
@@ -676,3 +681,33 @@ deque的操作是线程安全的，在多线程环境下可以放心使用。
 - multiprocessing：有类Queue，为多进程编程而设计。
 - asynio：为异步编程设计。
 - heapq：用来进行堆的操作。
+
+## 2.10 Mixed Bag Lists
+
+### list和tuple的微妙区别
+
+list中是可以存放不同类型的元素的。但是最好不要这样用，因为我们往往会对list中的每个元素进行同样的操作，如果类型不同，则有些支持而有些不支持。而tuple支持存放不同类型的元素看起来就很自然了。
+
+```python
+>>> l = [28, 14, '28', 5, '9', '1', 0, 6, '23', 19]
+>>> sorted(l)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: '<' not supported between instances of 'str' and 'int'
+```
+
+### Key Is Brilliant
+
+list.sort, sorted, max, min都支持一个key参数，这个参数是个接受一个函数的函数，每个元素都会作用于这个函数。不同于其他语言用两个参数的比较函数来定义比较规则，python的key参数既简洁又高效。因为key这个函数只会被调用一次，而其他语言的比较函数在每次比较时都会被调用。
+
+```python
+>>> l = [28, 14, '28', 5, '9', '1', 0, 6, '23', 19]
+>>> sorted(l, key=int)
+[0, '1', 5, 6, '9', 14, 19, '23', 28, '28']
+>>> sorted(l, key=str)
+[0, '1', 14, 19, '23', 28, '28', 5, 6, '9']
+```
+
+### Timsort
+
+这时一种自适应的排序算法，会根据待排元素的有序性自动选择插入排序或归并排序。
