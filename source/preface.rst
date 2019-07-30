@@ -11,7 +11,7 @@
 
 访问 `我的博客 <https://www.leosirius.com>`_ ，可以了解更多信息。
 
-我的OJ刷题笔记`点我跳转 <https://www.leosirius.com/solutions>`_
+我的OJ刷题笔记 `点我跳转 <https://www.leosirius.com/solutions>`_ 
 
 ----------------------------------
 作者的话
