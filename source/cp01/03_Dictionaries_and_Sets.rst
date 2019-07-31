@@ -1,0 +1,68 @@
+3 Dictionaries and Sets
+=======================
+
+3.1 Generic Mapping Types
+-------------------------
+
+所有\ ``mapping types``\ 的键都必须是可哈希的
+
+What is Hashable?
+~~~~~~~~~~~~~~~~~
+
+实现了两种特殊方法的：
+
+-  **hash**\ ：使其有在生命周期内不变的哈希值。
+-  **eq**\ ：可比较。
+
+总的来说，不可变的内建类型都是可哈希的。但有个例外，就是tuple如果以可变类型作为成员，则不可哈希。
+
+.. code:: python
+
+   >>> tt = (1, 2, (30, 40))
+   >>> hash(tt)
+   8027212646858338501
+   >>> tl = (1, 2, [30, 40])
+   >>> hash(tl)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: unhashable type: 'list'
+   >>> tf = (1, 2, frozenset([30, 40]))
+   >>> hash(tf)
+   985328935373711578
+
+dict Comprehensions
+~~~~~~~~~~~~~~~~~~~
+
+除了列表可以用生成式，字典也可以。我们先来看看生成字典的5中方法
+
+.. code:: python
+
+   >>> a = dict(one=1, two=2, three=3)
+   >>> b = {'one': 1, 'two': 2, 'three': 3}
+   >>> c = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
+   >>> d = dict([('two', 2), ('one', 1), ('three', 3)])
+   >>> e = dict({'three': 3, 'one': 1, 'two': 2})
+   >>> a == b == c == d ==e
+   True
+
+使用字典生成式：
+
+.. code:: python
+
+   >>> DIAL_CODES = [
+   ...         (86, 'China'),
+   ...         (91, 'India'),
+   ...         (1, 'United States'),
+   ...         (62, 'Indonisia'),
+   ...         (55, 'Brazil'),
+   ...         (92, 'Pakistan'),
+   ...         (880, 'Bangladesh'),
+   ...         (234, 'Nigeria'),
+   ...         (7, 'Russia'),
+   ...         (81, 'Japan'),
+   ...     ]
+   >>> country_code = {country: code for code, country in DIAL_CODES}
+   >>> country_code
+   {'China': 86, 'India': 91, 'United States': 1, 'Indonisia': 62, 'Brazil': 55, 'Pakistan': 92, 'Bangladesh': 880, 'Nigeria': 234, 'Russia': 7, 'Japan': 81}
+   >>> {code: country.upper() for country, code in country_code.items() if code < 66}
+   {1: 'UNITED STATES', 62: 'INDONISIA', 55: 'BRAZIL', 7: 'RUSSIA'}
