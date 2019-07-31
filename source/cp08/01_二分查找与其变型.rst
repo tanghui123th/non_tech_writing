@@ -1,0 +1,70 @@
+二分查找与其变型
+================
+
+下面我们查找vectornums中的target。
+
+普通二分查找
+------------
+
+-  while的条件中有等于
+
+.. code:: cpp
+
+   int l, r, m;
+   l = 0, r = nums.size() - 1;
+   while(l <= r){
+       m = (l + r) / 2;
+       if(target == nums[m]){
+           return m;
+       }else if(target < nums[m]){
+           r = m - 1;
+       }else{
+           l = m + 1;
+       }
+   }
+
+有重复元素，查找下界和上界
+--------------------------
+
+查找下界
+
+.. code:: cpp
+
+   int left = 0, right = nums.size()-1;
+   while(left < right){
+       int mid = (left + right) / 2;
+       if(target > nums[mid]) left = mid + 1;
+       else right = mid;
+   }
+   if(nums[left] != target) return -1;    // target不在nums中
+   else return left;   // 如果target在nums中，则left就是下界
+
+查找上界
+
+.. code:: cpp
+
+   right = nums.size() - 1;  // left不用重置
+   while(left < right){
+       int mid = (left + right) / 2 + 1;  // +1 make mid biased to right
+       if(target < nums[mid]) right = mid - 1;
+       else left = mid;
+   }
+   return right;   // 如果target在nums中，则right就是上界。
+
+查找rotate过后的最小元素的索引
+------------------------------
+
+rotate过的nums（如 nums = {5,6,7,8,9,1,2,3,4}），找到最小的数的索引
+
+.. code:: cpp
+
+   int l, r, m;
+   l = 0, r = nums.size() - 1;
+   while(l < r){
+       m = (l + r) / 2;
+       if(nums[m] > nums[r]){
+           l = m+1;
+       }else{
+           r = m;
+       }
+   }
