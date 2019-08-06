@@ -67,4 +67,4 @@ shell。shell是GNU核心工具集的一部分。
 ~~~~~~~~~~~~~~
 
 X
-Windows图形用户接口，它并不是一个软件，而是一个协议（protocal）。至于GNOME、KDE和X-Window之间的关系，可以简单地认为GNOME和KDE是并列关系，它们都是基于X-Window的桌面环境，通过X-Window其才能运行。
+Window图形用户接口，它并不是一个软件，而是一个协议（protocal）。至于GNOME、KDE和X-Window之间的关系，可以简单地认为GNOME和KDE是并列关系，它们都是基于X-Window的桌面环境，通过X-Window其才能运行。

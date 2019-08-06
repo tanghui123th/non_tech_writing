@@ -27,7 +27,7 @@ string类实际上是一个模板类：
 
 类似istream和ostream进行标准流输入输出，我们用istringstream和ostringstream进行字符串上的输入输出，也称内存输入输出。
 
-把字符串作为输出的内容
+把字符串作为输入的内容
 
 .. code:: cpp
 
@@ -38,18 +38,20 @@ string类实际上是一个模板类：
 
    int main(){
        string input("Input test 123 4.7 A");
-       istringstream inputString(input);
-       string string1, string2;
+       istringstream input_string_stream(input);
+       string str1, str2;
        int i;
        double d;
        char c;
-       inputString >> string1 >> string2 >> i >> d >> c;
-       cout << string1 << endl << string2 << endl;
+       input_string_stream >> str1 >> str2 >> i >> d >> c;
+
+       cout << str1 << endl << str2 << endl;
        cout << i << endl << d << endl << c << endl;
        long L;
-       if(inputString >> L) cout << "long\n";
-       else cout << "empty\n";
-       return 0;
+       if(input_string_stream >> L) cout <<  "L = " << L << endl;
+       else cout << "empty" << endl;
+
+       return 0; 
    }
 
 输出
@@ -117,7 +119,7 @@ STL的基本概念
 
 -  set/multiset 头文件set set中不允许相同元素。multiset中可以有。
 -  map/multimap 头文件map
-   map和set的不同之处在于map中存放的元素有且仅有两个成员变量。第一个名为first，第二个名为second。map根据first值对元素进行从小到大的排序。map与multimap不同之处在于是否允许相同的first值得元素。
+   map和set的不同之处在于map中存放的元素有且仅有两个成员变量。第一个名为first，第二个名为second。map根据first值对元素进行从小到大的排序。map与multimap不同之处在于是否允许相同的first值的元素。
 
 容器适配器
 ~~~~~~~~~~
