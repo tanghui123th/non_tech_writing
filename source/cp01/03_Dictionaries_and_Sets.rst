@@ -6,6 +6,26 @@
 
 所有\ ``mapping types``\ 的键都必须是可哈希的
 
+关于hash()
+~~~~~~~~~~
+
+在 hash() 对对象使用时，所得的结果不仅和对象的内容有关，还和对象的
+id()，也就是内存地址有关。
+
+.. code:: python
+
+   class TestObj:
+       def __init__(self, i):
+           self.i = i
+
+
+   obj1 = TestObj(1)
+   obj2 = TestObj(1)
+   print(id(obj1))   # 4313486224
+   print(id(obj2))   # 4313486336
+   print(hash(obj1)) # 269592889
+   print(hash(obj2)) # 269592896
+
 What is Hashable?
 ~~~~~~~~~~~~~~~~~
 
@@ -42,7 +62,7 @@ dict Comprehensions
    >>> c = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
    >>> d = dict([('two', 2), ('one', 1), ('three', 3)])
    >>> e = dict({'three': 3, 'one': 1, 'two': 2})
-   >>> a == b == c == d ==e
+   >>> a == b == c == d == e
    True
 
 使用字典生成式：
