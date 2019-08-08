@@ -419,7 +419,7 @@ TypeError: 'tuple' object does not support item assignment
 python中程序API设计的一个原则：如果函数或方法是改变对象本身（in-place），则返回None。
 
 - list.sort：in-place排序，返回None
-- 内建的sort：返回一个排好序的list对象。参数可以是不可变序列，或者生成器。
+- 内建的sorted：返回一个排好序的list对象。参数可以是不可变序列，或者生成器。
 
 以上两个函数都接受两个参数：
 
