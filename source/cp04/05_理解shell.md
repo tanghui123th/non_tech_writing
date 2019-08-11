@@ -1,4 +1,4 @@
-# 第五章 理解shell
+# 5 理解shell
 
 ## 5.1 shell的类型
 

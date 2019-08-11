@@ -1,4 +1,4 @@
-# 第一章 初识Linux shell
+# 1 初识Linux shell
 
 ## 1.1 什么是linux
 

@@ -1,4 +1,4 @@
-# 第四章 更多的bash shell命令
+# 4 更多的bash shell命令
 
 ## 4.1 检测程序
 
