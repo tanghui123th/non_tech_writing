@@ -38,7 +38,7 @@ leo@192 ~ $ ( pwd ; (echo $BASH_SUBSHELL ))
 
 ### 后台模式和子shell混合使用
 
-进程列表、写成和管道都利用了子shell
+进程列表、协程和管道都利用了子shell
 
 #### 后台模式
 

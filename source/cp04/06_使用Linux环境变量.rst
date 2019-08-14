@@ -121,3 +121,4 @@ shell有三种方式：
    four
    leo@192 ~ $ unset mytest
    leo@192 ~ $ echo ${mytest[*]}
+

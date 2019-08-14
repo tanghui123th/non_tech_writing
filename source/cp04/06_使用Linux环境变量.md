@@ -107,4 +107,5 @@ leo@192 ~ $ echo ${mytest[3]}
 four
 leo@192 ~ $ unset mytest
 leo@192 ~ $ echo ${mytest[*]}
+
 ```
