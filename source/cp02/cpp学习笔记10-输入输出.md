@@ -2,6 +2,16 @@
 
 ## 10.1 输入和输出
 
+### 三种输出类
+
+- 控制台IO：iostream
+- 文件IO：fstream
+- 内存IO：stringstream
+
+fstream和stringstream都继承自iostream。输入类都继承自istream，输出类都继承自ostream。
+
+### 与设备相连的错误输出
+
 输入流对象：
 
 - cin：与标准输入设备相连
