@@ -27,7 +27,7 @@
    Desktop       Downloads     Library       Music         Postman       Seafile       dev
    Documents     Github        Movies        Pictures      Public        YouCompleteMe
 
-进程列表就是用括号包围起来的一组命令，它能够创建子shell来执行这些命令。\ ``echo &BASH_SUBSHELL``\ 输出0，表示没有子shell。输出更大的数字，则表示有子shell。
+进程列表就是用括号包围起来的一组命令，它能够创建子shell来执行这些命令。\ ``echo $BASH_SUBSHELL``\ 输出0，表示没有子shell。输出更大的数字，则表示有子shell。
 
 ::
 
