@@ -143,3 +143,33 @@ major order)。
 .. code:: c
 
    void func2(int **mat);  // 我们需要的是指向10个元素的整型数组的指针，但是这里是指向指针的指针。
+
+8.3 指针数组
+------------
+
+下标引用的优先级高于间接访问，所以下面的表达式首先算下标引用，即api是个数组。其次数组中元素的类型是int*，即这是一个存放指针的数组。注意与指向数组的指针的区别。
+
+.. code:: c
+
+   int *api[10];
+
+指针数组一个最常用的例子是用来存放多个字符串。
+
+.. code:: c
+
+   char const *keyword[] = {
+       "do",
+       "for",
+       "if",
+       "register",
+       "return",
+       "switch",
+       "while",
+       NULL,
+   };
+
+首先keyword是一个数组，然后每个元素的类型是\ ``char const *``\ ，即指向字符串首地址的指针。我们把最后一个元素存放NULL，这样便可以方便的在for中使用。
+
+.. code:: c
+
+   for (kwp = keyword; *kwp != NULL; kwp++) {...}
