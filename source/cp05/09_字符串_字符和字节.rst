@@ -71,3 +71,74 @@
 .. code:: c
 
    char *strstr(char const *s1, char const *s2);
+
+9.4 高级字符串查找
+------------------
+
+查找一个字符串的前缀
+''''''''''''''''''''
+
+-  strspn返回字符串 str 开头连续包含在 group 中的部分的长度。
+-  strcspn该函数返回 str 开头连续都不含字符串 group 中字符的字符数。
+
+这两个函数如果从开头就没有匹配的，则会直接返回0。
+
+.. code:: c
+
+   size_t strspn(char const *str, char const *group);
+   size_t strcspn(char const *str, char const *group);
+
+.. code:: c
+
+   #include<stdio.h>
+   #include<string.h>
+
+   int main ()
+   {
+       int len1, len2;
+       char buffer[] = "1212leo";
+       char buffer2[] = "leoleo123";
+
+       len1 = strspn(buffer, "0123456789");
+       len2 = strcspn(buffer2, "0123456789");
+       printf("len1 = %d\n", len1);         // 返回4，即1212的长度
+       printf("len2 = %d\n", len2);         // 返回6，即leoleo的长度
+       return 0;
+   }
+
+查找标记
+''''''''
+
+sep是作为分隔符的字符集合。strtok函数会修改它所处理的字符串。如果不希望源字符串被修改，则应该使用拷贝。
+
+.. code:: c
+
+   char *strtok(char *str, char *sep);
+
+.. code:: c
+
+   #include<stdio.h>
+   #include<string.h>
+
+   void
+   print_tokens (char *line)
+   {
+       static char whitespace[] = " \t\n\r\v\f";   // 注意最前面有个空格
+       char *token;
+       for (token = strtok(line, whitespace);
+           token != NULL;
+           token = strtok(NULL, whitespace)) {
+           printf("Next token is %s\n", token);
+       }
+   }
+
+   int main ()
+   {
+       char str[] = "leo love philosophy";
+       print_tokens (str);
+       printf("%s\n", str);        // 这行输出leo，源字符串已经被修改
+       return 0;
+   }
+
+9.5 错误信息
+------------
