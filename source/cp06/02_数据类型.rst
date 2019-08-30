@@ -3,3 +3,82 @@
 
 2.1 概述
 --------
+
+========= ================================================================
+数据类型  说明
+========= ================================================================
+number    整数和小数
+string    字符串
+boolean   布尔类型
+undefined 表示“未定义”或不存在，即由于目前没有定义，所以此处暂时没有任何值
+null      表示空值，即此处的值为空
+object    各种值组成的集合
+========= ================================================================
+
+es6还有一种Symbol类型。数值、字符串、布尔值这三种类型，合称为原始类型（primitive
+type）的值，即它们是最基本的数据类型。对象则称为合成类型（complex
+type）的值。
+
+对象又可以分为三个子类型：
+
+-  狭义的对象（object）
+-  数组（array）
+-  函数（function）
+
+typeof运算符
+~~~~~~~~~~~~
+
+js中三种判断类型的方法如下。这里介绍typeof，其他两种方法后面介绍。
+
+-  typeof运算符
+-  instanceof运算符
+-  Object.prototype.toString
+
+一个未定义的变量如果直接使用会报错，但是如果用typeof运算符，则会返回“undefined”。这个特性可以用作判断的条件
+
+.. code:: js
+
+   f
+   // VM2124:1 Uncaught ReferenceError: f is not defined
+   //     at <anonymous>:1:1
+   // (anonymous) @ VM2124:1
+
+   typeof f
+   // "undefined"
+
+   typeof f === "undefined"
+   // true
+
+数组其实是一种特殊的对象
+''''''''''''''''''''''''
+
+.. code:: js
+
+   typeof []
+   //"object"
+
+   typeof {}
+   //"object"
+
+要区别数组和对象可以使用instanceof
+''''''''''''''''''''''''''''''''''
+
+.. code:: js
+
+   var b = {};
+   b instanceof Array
+   //false
+
+   var a = [];
+   a instanceof Array
+   //true
+
+typeof null 结果是object
+''''''''''''''''''''''''
+
+这是历史原因造成的。早期null是一种特殊的object。后来null独立出来，但是为了兼容之前的代码，所以这里的结果还是object。
+
+.. code:: js
+
+   typeof null
+   //"object"
