@@ -243,4 +243,77 @@ Infinity与NaN比较，总是返回false。Infinity的四则运算，符合无�
 parseInt()
 ''''''''''
 
-基本用法是把字符串转化为整数。它会一个个字符依次转换，如果遇到不能转为数字的字符，就不再进行下去，返回已经转好的部分。不能转化，则返回NaN
+基本用法是把字符串转化为整数。它会一个个字符依次转换，如果遇到不能转为数字的字符，就不再进行下去，返回已经转好的部分。不能转化，则返回NaN。
+
+.. code:: js
+
+   parseInt('+1dwdwd')
+   // 1
+
+   parseInt('efe')
+   // NaN
+
+parseInt还可以接受第二个参数，进行机制转换。第二个参数是当前的进制，在2-36之间。
+
+.. code:: js
+
+   parseInt(1000, 2)
+   8
+   parseInt(1000, 8)
+   512
+   parseInt(1000, 10)
+   1000
+
+parseFloat()
+''''''''''''
+
+基本用法是把字符串转化为浮点数。
+
+isNaN()
+'''''''
+
+判断是非为NaN。其实有个更好的方法，因为只有NaN不和自身相等
+
+.. code:: js
+
+   function myIsNaN(value) {
+     return value !== value;
+   }
+
+isFinite()
+''''''''''
+
+Infinity、NaN、undefined返回false，其他的数值返回true。
+
+   注意null也返回true
+
+2.4 字符串
+----------
+
+:raw-latex:`\除了转义之外`，还有三种特殊用法。
+
+-  :raw-latex:`\HHH`：HHH是三个八进制数（从000到377，即二进制0到255），代表一个字符
+-  :raw-latex:`\xHH`：HH是两个十六进制数（这样也只能表示从0到255的数），代表一个字符
+-  :raw-latex:`\uHHHH`：HHHH是四个十六进制数，代表一个字符
+
+字符集
+~~~~~~
+
+js内部使用unicode字符集。js内部都是用的2个字节（16位）来存放一个字符。但是现在unicode有些字符要4个字节才能存放。比如字\ ``'𝌆'``\ ，js是以两个字节的标准来分判断字符的，所以长度会返回2。
+
+.. code:: js
+
+   '𝌆'.length
+   // 2
+
+base64编码
+~~~~~~~~~~
+
+base64编码的目的不是为了加密，而是为了不出现特殊字符，简化程序的处理。比如ascii的0到31个字符是无法打印出来的，用base64就可以把它们转化为可打印的字符。
+
+base64编码由0-9, A-Z, a-z和+和/这64个字符构成。js原生提供两个函数
+
+-  btoa()：任意值转换为base64编码
+-  atob()：base64编码转换为原来的值
+
+但是注意非ascii字符不能直接用这两个方法。需要用\ ``encodeURIComponent``\ 和\ ``decodeURIComponent``\ 转化一下。
