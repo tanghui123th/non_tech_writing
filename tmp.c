@@ -1,22 +1,27 @@
 #include<stdio.h>
-#include<string.h>
+#include<stddef.h>   // offsetof 定义的文件
 
-void
-print_tokens (char *line)
+struct ALIGN
 {
-    static char whitespace[] = " \t\n\r\v\f";   // 注意最前面有个空格
-    char *token;
-    for (token = strtok(line, whitespace);
-        token != NULL;
-        token = strtok(NULL, whitespace)) {
-        printf("Next token is %s\n", token);
-    }
-}
+    char a;
+    int b;
+    char c;
+};
 
-int main ()
+struct ALIGN2
 {
-    char str[] = "leo love philosophy";
-    print_tokens (str);
-    printf("%s\n", str);        // 这行输出leo，源字符串已经被修改
+    int b;
+    char a;
+    char c;
+};
+
+int
+main ()
+{
+    struct ALIGN align;
+    struct ALIGN2 align2;
+    printf("sizeof(align) = %lu\n", sizeof(align));
+    printf("sizeof(align2) = %lu\n", sizeof(align2));
+    printf("offset of b in ALIGN = %lu\n", offsetof(struct ALIGN, b));  // 输出4
     return 0;
 }
