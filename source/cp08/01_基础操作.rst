@@ -135,3 +135,43 @@ BETWEEN
    |   10005 |
    +---------+
    2 rows in set (0.00 sec)
+
+AND OR
+~~~~~~
+
+AND的优先级高于OR
+
+.. code:: sql
+
+   mysql> SELECT prod_id, prod_price, prod_name
+       -> FROM products
+       -> WHERE vend_id = 1003 AND prod_price <= 10;
+   +---------+------------+----------------+
+   | prod_id | prod_price | prod_name      |
+   +---------+------------+----------------+
+   | FB      |      10.00 | Bird seed      |
+   | FC      |       2.50 | Carrots        |
+   | SLING   |       4.49 | Sling          |
+   | TNT1    |       2.50 | TNT (1 stick)  |
+   | TNT2    |      10.00 | TNT (5 sticks) |
+   +---------+------------+----------------+
+   5 rows in set (0.01 sec)
+
+IN
+~~
+
+.. code:: sql
+
+   mysql> SELECT prod_name, prod_price
+       -> FROM products
+       -> WHERE vend_id IN (1002, 1003)
+       -> ORDER BY prod_name;
+
+另外可加NOT对IN进行取反。NOT可以对IN、BETWEEN和EXISTS进行使用。
+
+.. code:: sql
+
+   mysql> SELECT prod_name, prod_price
+       -> FROM products
+       -> WHERE vend_id NOT IN (1002, 1003)
+       -> ORDER BY prod_name;
