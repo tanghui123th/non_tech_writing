@@ -320,3 +320,220 @@ base64编码由0-9, A-Z, a-z和+和/这64个字符构成。js原生提供两个�
 -  atob()：base64编码转换为原来的值
 
 但是注意非ascii字符不能直接用这两个方法。需要用\ ``encodeURIComponent``\ 和\ ``decodeURIComponent``\ 转化一下。
+
+2.5 对象
+--------
+
+.. _概述-2:
+
+概述
+~~~~
+
+js中的对象就是一组无序的键值对集合。对象的所有键名都是字符串（ES6
+又引入了 Symbol
+值也可以作为键名），所以加不加引号都可以。如果键名是数值，会被自动转为字符串。
+
+属性的值如果是函数，属性又称为方法。
+
+.. code:: js
+
+   var obj = {
+     p: function (x) {
+       return 2 * x;
+     }
+   };
+
+   obj.p(1) // 2
+
+属性可以动态创建，不必在对象声明时就指定。
+
+.. code:: js
+
+   var obj = {};
+   obj.foo = 123;
+   obj.foo // 123
+
+对象的引用
+''''''''''
+
+如果不同的变量名指向同一个对象，那么它们都是这个对象的引用，也就是说指向同一个内存地址。修改其中一个变量，会影响到其他所有变量。
+
+.. code:: js
+
+   var o1 = {};
+   var o2 = o1;
+
+   o1.a = 1;
+   o2.a // 1
+
+   o2.b = 2;
+   o1.b // 2
+
+但是这种引用只局限于对象，如果是一个原始类型的值，则会拷贝（这里不同于python中的一切皆对象）
+
+.. code:: js
+
+   var x = 1;
+   var y = x;
+
+   x = 2;
+   y // 1
+
+代码块和对象
+''''''''''''
+
+js引擎遇到大括号一律解释为代码块，如果要显示的让js引擎解释为对象，需要再加一个圆括号。eval的作用是对字符串求值
+
+.. code:: js
+
+   eval('{foo:123}')
+   // 123，这里被理解成了代码块，里面的值就是123
+
+   eval('({foo:123})')
+   // {foo: 123}
+
+属性的操作
+~~~~~~~~~~
+
+属性的读取 . []
+'''''''''''''''
+
+有.好和方括号两种方式。但是注意如果键是数字，则只能用方括号取值。
+
+.. code:: js
+
+   var obj = {
+     123: 'hello world'
+   };
+
+   obj[123] // "hello world"
+   obj.123 // 报错
+
+属性的赋值 . []
+'''''''''''''''
+
+同样有.号和方括号两种方式。js允许属性的“后绑定”，也就是说，你可以在任意时刻新增属性，没必要在定义对象的时候，就定义好属性。
+
+属性的查看 ``Objects.keys()``
+'''''''''''''''''''''''''''''
+
+查看一个对象的所有属性，可以用\ ``Objects.keys()``
+
+.. code:: js
+
+   var obj = {
+     key1: 1,
+     key2: 2
+   };
+
+   Object.keys(obj);
+   // ['key1', 'key2']
+
+属性删除 ``delete``
+'''''''''''''''''''
+
+使用delete命令删除属性，成功返回true
+
+.. code:: js
+
+   var obj = { p: 1 };
+   Object.keys(obj) // ["p"]
+
+   delete obj.p // true
+   obj.p // undefined
+   Object.keys(obj) // []
+
+注意，删除一个不存在的属性，delete不报错，而且返回true。只有一种情况，delete命令会返回false，那就是该属性存在，且不得删除。
+
+属性是否存在 ``in``
+'''''''''''''''''''
+
+.. code:: js
+
+   var obj = { p: 1 };
+   'p' in obj // true
+   'toString' in obj // true，toString是继承的属性
+
+如果要判断是否为对象自身的属性，可以使用\ ``hasOwnProperty``
+
+.. code:: js
+
+   var obj
+   obj.hasOwnProperty('toString')
+   // false
+
+属性的遍历 ``for ... in ...``
+'''''''''''''''''''''''''''''
+
+-  它遍历的是对象所有可遍历（enumerable）的属性，会跳过不可遍历的属性。
+-  它不仅遍历对象自身的属性，还遍历继承的属性。
+
+.. code:: js
+
+   var obj = {a: 1, b: 2, c: 3};
+
+   for (var i in obj) {
+     console.log('key = ' + i + ', value = ' + obj[i]);
+   }
+   // key = a, value = 1
+   // key = b, value = 2
+   // key = c, value = 3
+   // toString是继承的属性，但是也是不可比案例的属性，所以这里没有输出
+
+如果要遍历对象自身非继承的属性，可以配合\ ``hasOwnProperty``\ 使用。
+
+.. code:: js
+
+   var person = { name: 'leo' };
+
+   for (var key in person) {
+     if (person.hasOwnProperty(key)) {
+       console.log(key);
+     }
+   }
+
+   // name
+
+with语句
+~~~~~~~~
+
+基本作用是方便操作一个对象的多个属性。
+
+.. code:: js
+
+   var obj = {
+     p1: 1,
+     p2: 2,
+   };
+   with (obj) {
+     p1 = 4;
+     p2 = 5;
+   }
+   // 等同于
+   obj.p1 = 4;
+   obj.p2 = 5;
+
+注意，如果with区块内部有变量的赋值操作，必须是当前对象已经存在的属性，否则会创造一个当前作用域的全局变量。
+
+.. code:: js
+
+   var obj = {};
+   with (obj) {
+     p1 = 4;
+     p2 = 5;
+   }
+
+   obj.p1 // undefined
+   p1 // 4
+
+这是因为with区块没有改变作用域，它的内部依然是当前作用域。这造成了with语句的一个很大的弊病，就是绑定对象不明确。所以建议不适用with，如果对象操作不方便，可以使用一个临时变量
+
+.. code:: js
+
+   with(obj1.obj2.obj3) {
+     console.log(p1 + p2);
+   }
+
+   // 可以写成
+   var temp = obj1.obj2.obj3;
+   console.log(temp.p1 + temp.p2);
