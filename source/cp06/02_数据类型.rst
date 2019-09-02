@@ -537,3 +537,20 @@ with语句
    // 可以写成
    var temp = obj1.obj2.obj3;
    console.log(temp.p1 + temp.p2);
+
+2.6 函数
+--------
+
+.. _概述-3:
+
+概述
+~~~~
+
+函数的三种声明
+''''''''''''''
+
+.. code:: js
+
+   function print(s) {
+     console.log(s);
+   }
