@@ -1,0 +1,85 @@
+2 计算
+======
+
+2.1 创建计算字段
+----------------
+
+计算字段
+~~~~~~~~
+
+存储在数据库表中的数据一般不是应用程序所需要的格式，我们需要的是转化、计算或者格式化之后的数据。
+
+拼接字段
+~~~~~~~~
+
+Concat()把用逗号分隔开的多个串连接成一个串。
+
+.. code:: sql
+
+   mysql> SELECT Concat(vend_name, '(', vend_country, ')')
+       -> FROM vendors
+       -> ORDER BY vend_name;
+   +-------------------------------------------+
+   | Concat(vend_name, '(', vend_country, ')') |
+   +-------------------------------------------+
+   | ACME(USA)                                 |
+   | Anvils R Us(USA)                          |
+   | Furball Inc.(USA)                         |
+   | Jet Set(England)                          |
+   | Jouets Et Ours(France)                    |
+   | LT Supplies(USA)                          |
+   +-------------------------------------------+
+   6 rows in set (0.01 sec)
+
+别名
+~~~~
+
+别名有时也称导出列（derived column）
+
+.. code:: sql
+
+   mysql> SELECT Concat(vend_name, '(', vend_country, ')') AS vend_title
+       -> FROM vendors
+       -> ORDER BY vend_name;
+   +------------------------+
+   | vend_title             |
+   +------------------------+
+   | ACME(USA)              |
+   | Anvils R Us(USA)       |
+   | Furball Inc.(USA)      |
+   | Jet Set(England)       |
+   | Jouets Et Ours(France) |
+   | LT Supplies(USA)       |
+   +------------------------+
+   6 rows in set (0.00 sec)
+
+执行算数计算
+~~~~~~~~~~~~
+
+.. code:: sql
+
+   mysql> SELECT prod_id, quantity, item_price, quantity*item_price AS expanded_price 
+       -> FROM orderitems
+       -> WHERE order_num = 20005;
+   +---------+----------+------------+----------------+
+   | prod_id | quantity | item_price | expanded_price |
+   +---------+----------+------------+----------------+
+   | ANV01   |       10 |       5.99 |          59.90 |
+   | ANV02   |        3 |       9.99 |          29.97 |
+   | TNT2    |        5 |      10.00 |          50.00 |
+   | FB      |        1 |      10.00 |          10.00 |
+   +---------+----------+------------+----------------+
+   4 rows in set (0.01 sec)
+
+2.2 使用数据处理函数
+--------------------
+
+函数类型
+~~~~~~~~
+
+大多数SQL实现支持一下几种函数
+
+-  处理文本串的函数
+-  算数操作函数
+-  处理日期和时间的函数
+-  返回DBMS使用的特殊信息（如用户信息、版本信息）
