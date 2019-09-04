@@ -113,3 +113,34 @@ Soundex可以看做是按发音的近似来匹配
    | Coyote Inc. | Y Lee        |
    +-------------+--------------+
    1 row in set (0.33 sec)
+
+日期处理函数
+~~~~~~~~~~~~
+
+如果是比较日期，不考虑小时和分钟的话，一定要使用Data()，不然小时和分钟也会一起比较。mysql中的标准日期格式是yyyy-mm-dd。
+
+.. code:: sql
+
+   mysql> SELECT cust_id, order_num
+       -> FROM orders
+       -> WHERE Date(order_date) = '2005-09-01';
+   +---------+-----------+
+   | cust_id | order_num |
+   +---------+-----------+
+   |   10001 |     20005 |
+   +---------+-----------+
+   1 row in set (0.00 sec)
+
+.. code:: sql
+
+   mysql> SELECT cust_id, order_num 
+       -> FROM orders
+       -> WHERE Date(order_date) BETWEEN '2005-09-01' AND '2005-09-30';
+   +---------+-----------+
+   | cust_id | order_num |
+   +---------+-----------+
+   |   10001 |     20005 |
+   |   10003 |     20006 |
+   |   10004 |     20007 |
+   +---------+-----------+
+   3 rows in set (0.01 sec)
