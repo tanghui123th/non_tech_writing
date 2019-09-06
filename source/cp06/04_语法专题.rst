@@ -87,6 +87,8 @@ Boolean()
 Error
 ~~~~~
 
+Error对象的属性：
+
 -  message：错误提示信息
 -  name：错误名称（非标准属性）
 -  stack：错误的堆栈（非标准属性）
@@ -131,3 +133,66 @@ Error是最泛化的错误类型，js在Error的基础上还有其他6种更具�
    let customError = new UserError('这是自定义的错误！');
    customError.message
    // "这是自定义的错误！"
+
+4.3 throw语句
+-------------
+
+throw语句的作用是手动中断程序执行，抛出一个错误。下面抛出一个自定义错误
+
+.. code:: js
+
+   function UserError(message) {
+     this.message = message || '默认信息';
+     this.name = 'UserError';
+   }
+
+   throw new UserError('出错了！');
+   // Uncaught UserError {message: "出错了！", name: "UserError"}
+
+实际上throw可以抛出任何类型的值。也就是说，它的参数可以是任何值。
+
+.. code:: js
+
+   // 抛出一个字符串
+   throw 'Error！';
+   // Uncaught Error！
+
+   // 抛出一个数值
+   throw 42;
+   // Uncaught 42
+
+   // 抛出一个布尔值
+   throw true;
+   // Uncaught true
+
+   // 抛出一个对象
+   throw {
+     toString: function () {
+       return 'Error!';
+     }
+   };
+   // Uncaught {toString: ƒ}
+
+4.4 try…catch 结构
+------------------
+
+一旦发生错误，程序就中止执行了。JavaScript
+提供了try…catch结构，允许对错误进行处理，选择是否往下执行。catch代码块捕获错误之后，程序不会中断，会按照正常流程继续执行下去。
+
+为了捕捉不同类型的错误，catch代码块之中可以加入判断语句。
+
+.. code:: js
+
+   try {
+     foo.bar();
+   } catch (e) {
+     if (e instanceof EvalError) {
+       console.log(e.name + ": " + e.message);
+     } else if (e instanceof RangeError) {
+       console.log(e.name + ": " + e.message);
+     }
+     // ...
+   }
+
+4.5 finally
+-----------
