@@ -65,7 +65,7 @@ html_theme = 'default'
 #html_static_path = ['_static']
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'leo\'s notes'
+htmlhelp_basename = 'leo\'s lang_notes'
 
 
 # -- Options for LaTeX output ---------------------------------------------
