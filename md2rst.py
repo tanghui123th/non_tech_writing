@@ -1,6 +1,6 @@
 import os
 
-source_path = '/Users/leo/Github/sphinx-test/notes/source'
+source_path = '/Users/leo/Github/sphinx-test/lang_notes/source'
 all_md_file = []
 
 def collect_md_file(rootDir):

@@ -1,27 +1,30 @@
-#include<stdio.h>
-#include<stddef.h>   // offsetof 定义的文件
-
-struct ALIGN
-{
-    char a;
-    int b;
-    char c;
+struct PARTINFO {
+    int cost;
+    int supplier;
 };
 
-struct ALIGN2
-{
-    int b;
-    char a;
-    char c;
+struct SUBASSYINFO {
+    int n_parts;
+    struct {
+        char partno[10];
+        short quan;
+    } parts[MAXPARTS];
 };
 
-int
-main ()
-{
-    struct ALIGN align;
-    struct ALIGN2 align2;
-    printf("sizeof(align) = %lu\n", sizeof(align));
-    printf("sizeof(align2) = %lu\n", sizeof(align2));
-    printf("offset of b in ALIGN = %lu\n", offsetof(struct ALIGN, b));  // 输出4
-    return 0;
+struct INVREC {
+    char partno[10];
+    int quan;
+    enum { PART, SUBASSY } type;
+    union {
+        struct PARTINFO part;
+        struct SUBASSYINFO subassy;
+    } info;
+};
+
+if (rec.type == PART) {
+    y = rec.info.part.cost;
+    x = rec.info.part.supplier;
+} else {
+    y = rec.info.subassy.nparts;
+    z = rec.info.subassy.parts[0].quan;
 }
