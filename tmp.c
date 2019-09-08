@@ -1,30 +1,47 @@
-struct PARTINFO {
-    int cost;
-    int supplier;
-};
+#include<stdlib.h>
+#include<stdio.h>
 
-struct SUBASSYINFO {
-    int n_parts;
-    struct {
-        char partno[10];
-        short quan;
-    } parts[MAXPARTS];
-};
+int
+compare_integers (void const *a, void const *b)
+{
+    int const *pa = a;
+    int const *pb = b;
+    return *pa > *pb ? 1 : (*pa < *pb ? -1 : 0);
+}
 
-struct INVREC {
-    char partno[10];
-    int quan;
-    enum { PART, SUBASSY } type;
-    union {
-        struct PARTINFO part;
-        struct SUBASSYINFO subassy;
-    } info;
-};
+int
+main ()
+{
+    int *array;
+    int n_values;
+    int i;
 
-if (rec.type == PART) {
-    y = rec.info.part.cost;
-    x = rec.info.part.supplier;
-} else {
-    y = rec.info.subassy.nparts;
-    z = rec.info.subassy.parts[0].quan;
+    printf("How many values are there? ");
+    if (scanf("%d", &n_values) != 1 || n_values <= 0) {
+        printf("Illegal number of values.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    array = malloc(n_values * sizeof(int));
+    if (array == NULL) {
+        printf("Can't get memory for that many values.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < n_values; i++) {
+        printf("? ");
+        if (scanf("%d", array + i) != 1) {
+            printf("Error reading value #%d\n", i);
+            free(array);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    qsort(array, n_values, sizeof(int), compare_integers);
+
+    for (int i = 0; i < n_values; i++)
+        printf("%d\n", array[i]);
+
+    free(array);
+    return EXIT_SUCCESS;
 }
