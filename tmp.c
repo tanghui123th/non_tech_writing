@@ -1,47 +1,18 @@
-#include<stdlib.h>
 #include<stdio.h>
+#include<stdlib.h>
 
-int
-compare_integers (void const *a, void const *b)
+void
+mystery (int n)
 {
-    int const *pa = a;
-    int const *pb = b;
-    return *pa > *pb ? 1 : (*pa < *pb ? -1 : 0);
+    n += 5;
+    n /= 10;
+    printf("%s\n", "**********" + 10 - n);
 }
 
 int
-main ()
+main (int argc, char **argv)
 {
-    int *array;
-    int n_values;
-    int i;
-
-    printf("How many values are there? ");
-    if (scanf("%d", &n_values) != 1 || n_values <= 0) {
-        printf("Illegal number of values.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    array = malloc(n_values * sizeof(int));
-    if (array == NULL) {
-        printf("Can't get memory for that many values.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; i < n_values; i++) {
-        printf("? ");
-        if (scanf("%d", array + i) != 1) {
-            printf("Error reading value #%d\n", i);
-            free(array);
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    qsort(array, n_values, sizeof(int), compare_integers);
-
-    for (int i = 0; i < n_values; i++)
-        printf("%d\n", array[i]);
-
-    free(array);
+    printf("%c\n", *("xyz" + 1));   // "xyz" + 1指向y，结果输出y
+    printf("%c\n", "xyz"[2]);       // "xyz"[2]指向z，结果输出z
     return EXIT_SUCCESS;
 }
