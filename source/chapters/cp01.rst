@@ -1,8 +1,12 @@
 =============================
-第一章：Fluent Python 学习笔记
+第一章：python笔记
 =============================
 
-这一章是Fluent Python的学习笔记，原作者保留所有版权
+主要参考：
+
+-  Python Crash Course
+-  Automate the Boring Stuff with Python
+-  Fluent Python
 
 ---------------------------
 
