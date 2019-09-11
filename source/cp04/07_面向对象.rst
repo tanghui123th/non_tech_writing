@@ -1,0 +1,115 @@
+7 面向对象
+==========
+
+7.1 构造函数
+------------
+
+典型的面向对象编程语言（比如 C++ 和
+Java），都有“类”（class）这个概念。所谓“类”就是对象的模板，对象就是“类”的实例。但是，JavaScript
+语言的对象体系，不是基于“类”的，而是基于构造函数（constructor）和原型链（prototype）。
+
+JavaScript
+语言使用构造函数（constructor）作为对象的模板。所谓”构造函数”，就是专门用来生成实例对象的函数。它就是对象的模板，描述实例对象的基本结构。一个构造函数，可以生成多个实例对象，这些实例对象都有相同的结构。
+
+构造函数就是一个普通的函数，为了与普通函数区别，构造函数名字的第一个字母通常大写。构造函数的特点有两个。
+
+-  函数体内部使用了this关键字，代表了所要生成的对象实例。
+-  生成对象的时候，必须使用new命令。
+
+7.2 new命令
+-----------
+
+基本用法
+~~~~~~~~
+
+new命令的作用，就是执行构造函数，返回一个实例对象。
+
+.. code:: js
+
+   var Vehicle = function (p) {
+     this.price = p;
+   };
+
+   var v = new Vehicle(500);
+
+new命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。
+
+.. code:: js
+
+   // 推荐的写法
+   var v = new Vehicle();
+   // 不推荐的写法
+   var v = new Vehicle;
+
+如果调用构造函数时不加new，构造函数就变成了普通函数，并不会生成实例对象。而且由于后面会说到的原因，this这时代表全局对象，将造成一些意想不到的结果。变量v变成了undefined，而price属性变成了全局变量。
+
+.. code:: js
+
+   var Vehicle = function (){
+     this.price = 1000;
+   };
+
+   var v = Vehicle();
+   v // undefined
+   price // 1000
+
+构造函数内部使用严格模式，即第一行加上use
+strict。这样的话，一旦忘了使用new命令，直接调用构造函数就会报错。严格模式中，函数内部的this不能指向全局对象，默认等于undefined。
+
+.. code:: js
+
+   function Fubar(foo, bar){
+     'use strict';
+     this._foo = foo;
+     this._bar = bar;
+   }
+
+   Fubar()
+   // TypeError: Cannot set property '_foo' of undefined
+
+new 命令的原理
+~~~~~~~~~~~~~~
+
+使用new命令时，它后面的函数依次执行下面的步骤。
+
+1. 创建一个空对象，作为将要返回的对象实例。
+2. 将这个空对象的原型，指向构造函数的prototype属性。
+3. 将这个空对象赋值给函数内部的this关键字。
+4. 开始执行构造函数内部的代码。
+
+如果构造函数内部有return语句，而且return后面跟着一个对象，new命令会返回return语句指定的对象；否则，就会不管return语句，返回this对象。构造函数Vehicle的return语句返回一个数值。这时，new命令就会忽略这个return语句，返回“构造”后的this对象。
+
+.. code:: js
+
+   var Vehicle = function () {
+     this.price = 1000;
+     return 1000;
+   };
+
+   (new Vehicle()) === 1000
+   // false
+
+但如果return语句返回的是一个跟this无关的新对象，new命令会返回这个新对象，而不是this对象。这一点需要特别引起注意。
+
+.. code:: js
+
+   var Vehicle = function (){
+     this.price = 1000;
+     return { price: 2000 };
+   };
+
+   (new Vehicle()).price
+   // 2000
+
+另一方面，如果对普通函数（内部没有this关键字的函数）使用new命令，则会返回一个空对象。因为new命令总是返回一个对象，要么是实例对象，要么是return语句指定的对象。
+
+.. code:: js
+
+   function getMessage() {
+     return 'this is a message';
+   }
+
+   var msg = new getMessage();
+
+   msg // {}
+   typeof msg // "object"
