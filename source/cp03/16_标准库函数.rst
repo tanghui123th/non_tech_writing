@@ -1,0 +1,44 @@
+16 标准库函数
+=============
+
+16.1 整型函数
+-------------
+
+算数 <stdlib.h>
+~~~~~~~~~~~~~~~
+
+.. code:: c
+
+   int abs(int value);
+   long int labs(long int value);
+   div_t div(int numerator, int denominator);
+   ldiv_t ldiv(long int numerator, long int denom);
+
+div_t和ldiv_t是两个结构体，包含两个字段
+
+.. code:: c
+
+   int quot; // 商
+   int ren;  // 余数
+
+随机数 <stdlib.h>
+~~~~~~~~~~~~~~~~~
+
+rand返回一个0到RAND_MAX之间的伪随机数。srand传入种子，可以避免每次产生相同的随机数序列。
+
+.. code:: c
+
+   int rand(void);
+   void srand(unsigned int seed);
+
+字符串转换 <stdlib.h>
+~~~~~~~~~~~~~~~~~~~~~
+
+后面两个函数的第三个参数是基数，第二个参数指向无法再转换下去的字符串的指针。如\ ``x = strtol("   590bear", next, 12);``\ 最后x等于9947，next保存指向e的指针。因为e不是12进制合法字符。
+
+.. code:: c
+
+   int atoi(char const *string);
+   long int atol(char const *string);
+   long int strtol(char const *string, char **unused, int base);
+   unsigned long int strtoul(char const *string, char **unused, int base);

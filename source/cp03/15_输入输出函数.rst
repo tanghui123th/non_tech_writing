@@ -1,0 +1,121 @@
+15 输入输出函数
+===============
+
+15.1 ANSI IO概念
+----------------
+
+计算机有很多输入输出设备，ANSI
+C对这些IO抽象出流的概念。C只关心从程序中移入或移出字节，这些字节流便被称为流。绝大多数流是完全缓冲的，即”读取“和”写入“实际上向内存的缓冲区(buffer)来回复制数据。
+
+缓冲机制使得我们在调试程序是用printf可能不能得到及时的输出，这时候可以使用fflush
+
+.. code:: c
+
+   printf("something or other");
+   fflush(stdout);
+
+流分为两种，文本流和二进制流。stdio.h中有一个FILE数据结构，用于访问一个流。对于每个ANSI
+C程序，运行时系统必须提供至少三个流：stdin, stdout,
+stderr。它们都是指向FILE结构的指针。
+
+IO函数以三种基本形式处理数据：单个字符、文本行和二进制数据。
+
+========== =========== ============ ==================================
+数据类型   输入        输出         描述
+========== =========== ============ ==================================
+字符       getchar     putchar      读写单个字符
+文本行     gets, scanf puts, printf 分别是未格式化的读写和格式化的读写
+二进制数据 fread       fwrite       读写二进制数据
+========== =========== ============ ==================================
+
+15.2 打开流和关闭流
+-------------------
+
+fopen函数用来打开一个文件，并把一个流和这个文件相关联。成功返回FILE指针，失败返回NULL。
+
+.. code:: c
+
+   FILE *fopen(char const *name, char const *mode);
+
+下面的表格列出了一些常用的模式
+
+====== ==== ==== ====
+\      读取 写入 添加
+====== ==== ==== ====
+文本   r    w    a
+二进制 rb   wb   ab
+====== ==== ==== ====
+
+fclose函数用来关闭流。对于输出流，会在关闭之前刷新缓冲区。函数执行成功返回0，失败返回EOF。
+
+下面是一个使用fopen和fclose的例子。
+
+.. code:: c
+
+   #include<stdio.h>
+   #include<stdlib.h>
+
+   int main(int ac, int **av)
+   {
+       int exit_status = EXIT_SUCCESS;
+       FILE *input;
+
+       while (*++av != NULL) {
+           input = fopen(*av, "r");
+           if (input == NULL) {
+               perror(*av);
+               exit_status = EXIT_FAILURE;
+               continue;
+           }
+
+              /* handle fi */
+
+           if (fclose(input) != 0) {
+               perror("fclose");
+               exit(EXIT_SUCCESS);
+           }
+       }
+       return exit_status;
+   }
+
+另外还有一个freopen函数，最后一个参数是需要打开的流。这个函数首先关闭这个流，然后用指定的文件和模式重新打开这个流。失败返回NULL，成功就返回第三个参数。
+
+.. code:: c
+
+   FILE *freopen(char const *filename, char const *mode, FILE *stream);
+
+15.3 字符IO
+-----------
+
+getchar家族函数
+~~~~~~~~~~~~~~~
+
+fgetc和getc传入需要操作的流，getchar始终从标准输入流中读取。读取成功则返回读取的那个字符。若流中不存在更多字符，则返回EOF。
+
+.. code:: c
+
+   int fgetc(FILE *stream);
+   int getc(FILE *stream);
+   int getchar(void);
+
+putchar家族函数
+~~~~~~~~~~~~~~~
+
+第一个参数是要输出的字符。函数失败，返回EOF。
+
+.. code:: c
+
+   int fputc(int ch, FILE *stream);
+   int putc(int ch, FILE *stream);
+   int putchar(int ch);
+
+注意，fgetc和fputc是真正的函数，而其他四个都是宏。
+
+撤销字符IO
+~~~~~~~~~~
+
+可以把之前从流中读出来的字符ch又返回到流中去。
+
+.. code:: c
+
+   int ungetc(int ch, FILE *stream);

@@ -1,8 +1,25 @@
 #include<stdio.h>
-#error No opt
+#include<stdlib.h>
 
-int
-main ()
+int main(int ac, int **av)
 {
-    return 0;
-}
+    int exit_status = EXIT_SUCCESS;
+    FILE *input;
+
+    while (*++av != NULL) {
+        input = fopen(*av, "r");
+        if (input == NULL) {
+            perror(*av);
+            exit_status = EXIT_FAILURE;
+            continue;
+        }
+
+           /* handle fi */
+
+        if (fclose(input) != 0) {
+            perror("fclose");
+            exit(EXIT_SUCCESS);
+        }
+    }
+    return exit_status;
+ }

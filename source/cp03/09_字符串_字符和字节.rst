@@ -6,8 +6,8 @@
 
 这些函数用NUL来寻找字符串的结尾。在使用这些函数的时候，程序员必须自己保证字符串有正确的结尾，不会溢出内存。
 
--  复制字符串 ``char *strcpy(char *dst, char const *scr);``
--  连接字符串 ``char *strcat(char *dst, char const *scr);``
+-  复制字符串 ``char *strcpy(char *dst, char const *src);``
+-  连接字符串 ``char *strcat(char *dst, char const *src);``
 -  字符串比较 ``int strcmp(char const *s1, char const *s2);``
 
 前两个函数的返回值是第一个参数的一份拷贝，即指向目标字符数组的指针的拷贝。比较函数如果s1小于s2返回负数（一般是-1），s1等于s2返回0，s1大于s2返回整数（一般是1）。
@@ -66,7 +66,7 @@
 查找一个子串
 ''''''''''''
 
-如果s2是空串，返回s1。如果没有匹配结果，返回NULL。
+如果s2是空串，返回s1（即空串是任何串的子串）。如果没有匹配结果，返回NULL。
 
 .. code:: c
 
@@ -147,7 +147,7 @@ sep是作为分隔符的字符集合。strtok函数会修改它所处理的字�
 
 .. code:: c
 
-   char *strerror(int errir_number);
+   char *strerror(int error_number);
 
 9.6 字符操作
 ------------
