@@ -1,8 +1,8 @@
-7 面向对象
-==========
+7 面向对象（未完）
+==================
 
-7.1 构造函数
-------------
+7.1 实例对象与new
+-----------------
 
 典型的面向对象编程语言（比如 C++ 和
 Java），都有“类”（class）这个概念。所谓“类”就是对象的模板，对象就是“类”的实例。但是，JavaScript
@@ -16,11 +16,8 @@ JavaScript
 -  函数体内部使用了this关键字，代表了所要生成的对象实例。
 -  生成对象的时候，必须使用new命令。
 
-7.2 new命令
------------
-
-基本用法
-~~~~~~~~
+new命令
+~~~~~~~
 
 new命令的作用，就是执行构造函数，返回一个实例对象。
 
@@ -113,3 +110,48 @@ new 命令的原理
 
    msg // {}
    typeof msg // "object"
+
+new.target属性
+~~~~~~~~~~~~~~
+
+函数内部可以使用new.target属性。如果当前函数是new命令调用，new.target指向当前函数，否则为undefined。
+
+.. code:: js
+
+   function f() {
+     console.log(new.target === f);
+   }
+
+   f() // false
+   new f() // true
+
+.. code:: js
+
+   function f() {
+     if (!new.target) {
+       throw new Error('请使用 new 命令调用！');
+     }
+     // ...
+   }
+
+   f() // Uncaught Error: 请使用 new 命令调用！
+
+Object.create() 创建实例对象
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+在拿不到构造函数，但是有对象实例的情况下，可以使用对象.create()来创建一个新的对象。下面的例子中，对象person1是person2的模板，后者继承了前者的属性和方法。
+
+.. code:: js
+
+   var person1 = {
+     name: '张三',
+     age: 38,
+     greeting: function() {
+       console.log('Hi! I\'m ' + this.name + '.');
+     }
+   };
+
+   var person2 = Object.create(person1);
+
+   person2.name // 张三
+   person2.greeting() // Hi! I'm 张三.
