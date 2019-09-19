@@ -107,3 +107,55 @@ setTimeout函数用来指定某个函数或某段代码，在多少毫秒之后�
    setTimeout(function (a,b) {
      console.log(a + b);
    }, 1000, 1, 1);
+
+使用setTimeout要注意一点：如果回调函数是对象的方法，那么setTimeout使得方法内部的this关键字指向全局环境，而不是定义时所在的那个对象。
+
+.. code:: js
+
+   var x = 1;
+
+   var obj = {
+     x: 2,
+     y: function () {
+       console.log(this.x);
+     }
+   };
+
+   setTimeout(obj.y, 1000) // 1
+
+这个问题有两个解决方法：一是把obj.y放到一个函数里，二是使用bind
+
+.. code:: js
+
+   var x = 1;
+
+   var obj = {
+     x: 2,
+     y: function () {
+       console.log(this.x);
+     }
+   };
+
+   setTimeout(function () {
+     obj.y();
+   }, 1000);
+   // 2
+
+.. code:: js
+
+   var x = 1;
+
+   var obj = {
+     x: 2,
+     y: function () {
+       console.log(this.x);
+     }
+   };
+
+   setTimeout(obj.y.bind(obj), 1000)
+   // 2
+
+setInterval
+~~~~~~~~~~~
+
+setInterval函数的用法与setTimeout完全一致，区别仅仅在于setInterval指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行。
