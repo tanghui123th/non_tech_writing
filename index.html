@@ -8,8 +8,25 @@
   }
 
 </style>
+
 </head>
 
 <body>
-<div id="main">cscs</div>
+<div id="main"></div>
+
+
+<script>
+    console.log('111')
+    var div = document.getElementById('main');
+    var opacity = 1;
+    var fader = setInterval(function() {
+      opacity -= 0.001;
+      if (opacity >= 0) {
+        div.style.opacity = opacity;
+      } else {
+        opacity = 1;
+        //clearInterval(fader);
+      }
+    }, 1);
+  </script>
 </body>
