@@ -1,32 +1,8 @@
-<head>
-<style>
-  #main {
-    width: 600px;
-    height: 400px;
-    margin: 0 auto; 
-    background-color: rebeccapurple;
-  }
-
-</style>
-
-</head>
-
-<body>
-<div id="main"></div>
-
+<input type="text" name="age" size=3 onChange="validate(this, 18, 99);">
 
 <script>
-    console.log('111')
-    var div = document.getElementById('main');
-    var opacity = 1;
-    var fader = setInterval(function() {
-      opacity -= 0.001;
-      if (opacity >= 0) {
-        div.style.opacity = opacity;
-      } else {
-        opacity = 1;
-        //clearInterval(fader);
-      }
-    }, 1);
-  </script>
-</body>
+function validate(obj, lowval, hival){
+  if ((obj.value < lowval) || (obj.value > hival))
+    console.log('Invalid Value!');
+}
+</script>

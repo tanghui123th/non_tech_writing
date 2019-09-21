@@ -155,3 +155,107 @@ Object.create() 创建实例对象
 
    person2.name // 张三
    person2.greeting() // Hi! I'm 张三.
+
+7.2 this关键字
+--------------
+
+this的含义
+~~~~~~~~~~
+
+this总返回一个对象。this就是属性或方法“当前”所在的对象。
+
+this.name表示name属性所在的那个对象。由于this.name是在describe方法中调用，this就是当前describe方法所在的对象。
+
+.. code:: js
+
+   function f() {
+     return '姓名：'+ this.name;
+   }
+
+   var A = {
+     name: '张三',
+     describe: f
+   };
+
+   var B = {
+     name: '李四',
+     describe: f
+   };
+
+   A.describe() // "姓名：张三"
+   B.describe() // "姓名：李四"
+
+下面的例子是一个文本输入框，每当用户输入一个值，就会调用onChange回调函数，验证这个值是否在指定范围。浏览器会向回调函数传入当前对象，因此this就代表传入当前对象（即文本框），然后就可以从this.value上面读到用户的输入值。
+
+.. code:: html
+
+   <input type="text" name="age" size=3 onChange="validate(this, 18, 99);">
+
+   <script>
+   function validate(obj, lowval, hival){
+     if ((obj.value < lowval) || (obj.value > hival))
+       console.log('Invalid Value!');
+   }
+   </script>
+
+总结一下，JavaScript
+语言之中，一切皆对象，运行环境也是对象，所以函数都是在某个对象之中运行，this就是函数运行时所在的对象（环境）。这本来并不会让用户糊涂，但是
+JavaScript
+支持运行环境动态切换，也就是说，this的指向是动态的，没有办法事先确定到底指向哪个对象，这才是最让初学者感到困惑的地方。
+
+this的实质
+~~~~~~~~~~
+
+我们先来看看js中内存的数据结构。
+
+下面的代码JavaScript 引擎会先在内存里面，生成一个对象{ foo: 5
+}，然后把这个对象的内存地址赋值给变量obj。变量obj是一个地址（reference）。后面如果要读取obj.foo，引擎先从obj拿到内存地址，然后再从该地址读出原始的对象，返回它的foo属性。
+
+.. code:: js
+
+   var obj = { foo:  5 };
+
+原始的对象以字典结构保存，每一个属性名都对应一个属性描述对象。上面例子的foo属性，实际上是以下面的形式保存的。
+
+.. code:: js
+
+   {
+     foo: {
+       [[value]]: 5
+       [[writable]]: true
+       [[enumerable]]: true
+       [[configurable]]: true
+     }
+   }
+
+如果foo的值是函数的话，则保存的是函数的地址
+
+.. code:: js
+
+   {
+     foo: {
+       [[value]]: 函数的地址
+       ...
+     }
+   }
+
+由于函数是一个单独的值，所以它可以在不同的环境（上下文）执行。JavaScript
+允许在函数体内部，引用当前环境的其他变量。所以，this就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。
+
+.. code:: js
+
+   var f = function () {
+     console.log(this.x);
+   }
+
+   var x = 1;
+   var obj = {
+     f: f,
+     x: 2,
+   };
+
+   // 单独执行
+   f() // 1
+
+   // obj 环境执行
+   obj.f() // 2
