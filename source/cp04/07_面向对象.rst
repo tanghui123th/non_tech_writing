@@ -259,3 +259,53 @@ this的实质
 
    // obj 环境执行
    obj.f() // 2
+
+this的使用场合
+~~~~~~~~~~~~~~
+
+-  全局环境
+   在全局环境中使用this，就是指顶层对象window。不管是不是在函数内部，只要是在全局环境下运行，this就是指顶层对象window。
+
+.. code:: js
+
+   this === window // true
+   function f() {
+     console.log(this === window);
+   }
+   f() // true
+
+-  构造函数 构造函数中的this，指的是实例对象。
+
+.. code:: js
+
+   var Obj = function (p) {
+     this.p = p;
+   };
+
+   var o = new Obj('Hello World!');
+   o.p // "Hello World!"
+
+-  对象的方法
+
+.. code:: js
+
+   var obj ={
+     foo: function () {
+       console.log(this);
+     }
+   };
+
+   obj.foo() // obj
+
+或者用构造函数创建一个对象
+
+.. code:: js
+
+   function f() {
+     this.if = function () {
+       console.log(this);
+     }
+   }
+
+   a = new f();
+   a.if(); // 这里会打印a这个对象本身。
