@@ -17,8 +17,8 @@ DOM 只是一个接口规范，可以用各种语言实现。所以严格地说�
 节点的类型有七种。
 
 - Document：整个文档树的顶层节点
-- DocumentType：doctype标签（比如<!DOCTYPE html>）
-- Element：网页的各种HTML标签（比如<body>、<a>等）
+- DocumentType：doctype标签（比如`<!DOCTYPE html>`）
+- Element：网页的各种HTML标签（比如`<body>`、`<a>`等）
 - Attribute：网页元素的属性（比如class="right"）
 - Text：标签之间或标签包含的文本
 - Comment：注释
@@ -28,7 +28,7 @@ DOM 只是一个接口规范，可以用各种语言实现。所以严格地说�
 
 ### 节点树
 
-浏览器原生提供顶层document节点，代表整个文档。文档的第一层有两个节点，第一个是文档类型节点（<!doctype html>），第二个是 HTML 网页的顶层容器标签<html>。后者构成了树结构的根节点（root node）
+浏览器原生提供顶层document节点，代表整个文档。文档的第一层有两个节点，第一个是文档类型节点（`<!doctype html>`），第二个是 HTML 网页的顶层容器标签`<html>`。后者构成了树结构的根节点（root node）
 
 除了根节点，其他节点都有三种层级关系。
 
@@ -44,5 +44,15 @@ DOM 提供操作接口，用来获取这三种关系的节点。比如，firstCh
 
 ### 属性
 
-##### 
+##### Node.prototype.nodeType
+
+nodeType属性返回一个整数值，表示节点的类型。Node 对象定义了几个常量，对应这些类型值。
+
+- 文档节点（document）：9，对应常量Node.DOCUMENT_NODE
+- 元素节点（element）：1，对应常量Node.ELEMENT_NODE
+- 属性节点（attr）：2，对应常量Node.ATTRIBUTE_NODE
+- 文本节点（text）：3，对应常量Node.TEXT_NODE
+- 文档片断节点（DocumentFragment）：11，对应常量Node.DOCUMENT_FRAGMENT_NODE
+- 文档类型节点（DocumentType）：10，对应常量Node.DOCUMENT_TYPE_NODE
+- 注释节点（Comment）：8，对应常量Node.COMMENT_NODE
 
