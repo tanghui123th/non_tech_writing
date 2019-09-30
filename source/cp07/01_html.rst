@@ -27,6 +27,28 @@ title
 
 显示在浏览器的标题栏中。搜索引擎在检索页面时，会首先检索title中的内容。它是网页中对于搜索引擎来说对重要的内容。
 
+meta
+~~~~
+
+一些属性：
+
+-  charset：指定字符集
+-  name：和content结合设置关键字，name的值是对content值的描述
+-  content：如上
+
+keywords和description是给搜索引擎看的。
+
+.. code:: html
+
+   <meta name="keywords" content="HTML5, java, cpp" />
+   <meta name="description" content="leo's site" />
+
+-  http-equiv：可以用来重定向。下面的例子在5秒后跳转到google。
+
+.. code:: html
+
+   <meta http-equiv="refresh" content="5;url=https://www.google.com" />
+
 body
 ~~~~
 
