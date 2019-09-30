@@ -161,3 +161,62 @@ Node.prototype.childNodes
 
 childNodes属性返回一个类似数组的对象（NodeList集合），成员包括当前节点的所有子节点。文档节点（document）就有两个子节点：文档类型节点（docType）和
 HTML 根元素节点。
+
+Node.prototype.isConnected
+''''''''''''''''''''''''''
+
+isConnected属性返回一个布尔值，表示当前节点是否在文档之中。
+
+.. code:: js
+
+   var test = document.createElement('p');
+   test.isConnected // false
+
+   document.body.appendChild(test);
+   test.isConnected // true
+
+方法
+~~~~
+
+Node.prototype.appendChild()
+''''''''''''''''''''''''''''
+
+接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点。该方法的返回值就是插入文档的子节点。如果参数节点是
+DOM 已经存在的节点，appendChild()方法会将其从原来的位置，移动到新位置。
+
+如果appendChild()方法的参数是DocumentFragment节点，那么插入的是DocumentFragment的所有子节点，而不是DocumentFragment节点本身。返回值是一个空的DocumentFragment节点。
+
+.. code:: js
+
+   var p = document.createElement('p');
+   document.body.appendChild(p);
+
+Node.prototype.hasChildNodes()
+''''''''''''''''''''''''''''''
+
+返回一个布尔值，表示当前节点是否有子节点。下面代码表示，如果foo节点有子节点，就移除第一个子节点。
+
+.. code:: js
+
+   var foo = document.getElementById('foo');
+
+   if (foo.hasChildNodes()) {
+     foo.removeChild(foo.childNodes[0]);
+   }
+
+Node.prototype.cloneNode()
+''''''''''''''''''''''''''
+
+cloneNode方法用于克隆一个节点。它接受一个布尔值作为参数，表示是否同时克隆子节点。它的返回值是一个克隆出来的新节点。
+
+.. code:: js
+
+   var cloneUL = document.querySelector('ul').cloneNode(true);
+
+这个方法需要注意三点：
+
+-  隆一个节点，会拷贝该节点的所有属性，但是会丧失addEventListener方法和on-属性（即node.onclick
+   = fn），添加在这个节点上的事件回调函数。
+-  该方法返回的节点不在文档之中
+-  克隆一个节点之后，DOM
+   有可能出现两个有相同id属性（即id=“xxx”）的网页元素，这时应该修改其中一个元素的id属性。
