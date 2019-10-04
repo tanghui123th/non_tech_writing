@@ -4,6 +4,9 @@
 2.1 json
 --------
 
+两对、四个主要使用的函数\ ``dump`` ``load`` ``dumps``
+``loads``\ 。前两个是在是在文件中保存和加载json数据，后两个则是在字符串中保存和加载数据。
+
 -  dump()：把数据以json格式存放在文件中。第一个参数是要保存的python对象，第二个参数是文件对象
 -  load()：从json格式的文件中读取数据。
 
@@ -63,6 +66,8 @@ assertNotIn(item, list) item not in list
 
 一个例子
 ~~~~~~~~
+
+用一个实际的例子来说明unittest的使用。我们创建一个抽象的\ ``AnonymousSurvey``\ 类来模拟一个问卷调查，这个类有存储答案和展示结果的功能。
 
 .. code:: python
 

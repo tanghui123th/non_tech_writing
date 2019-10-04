@@ -1,0 +1,146 @@
+3 数据可视化
+============
+
+3.1 matplotlib
+--------------
+
+使用plot绘制折线图
+~~~~~~~~~~~~~~~~~~
+
+直接来看一个使用的例子。直接向plot传递一个list，则x轴是索引，而y轴是索引对应的值。
+
+.. code:: py
+
+   import matplotlib.pyplot as plt
+
+   squares = [1, 4, 9, 16, 25]     # 传入list，则绘制的图形x轴是索引，y轴是对应的值
+
+   plt.plot(squares, linewidth=5)  # linewidth 指定线条的宽度
+
+   # 分别指定title和x，y轴的label和字体大小
+   plt.title('Square Numbers', fontsize=24)
+   plt.xlabel('Value', fontsize=24)
+   plt.ylabel('Square of Value', fontsize=24)
+
+   # 这个函数设置刻度的样式。这里将刻度标记的字体设为24，并同时对x和y轴生效
+   plt.tick_params(axis='both', labelsize=24)
+
+   plt.show()
+
+如果希望x和y轴的值都自定义，可以向plot函数传递两个list，第一个list是x坐标的值，第二个list是y坐标的值。
+
+.. code:: py
+
+   import matplotlib.pyplot as plt
+
+   input_values = [1, 2, 3, 4, 5]
+   squares = [1, 4, 9, 16, 25]     # 传入list，则绘制的图形x轴是索引，y轴是对应的值
+
+   plt.plot(input_values, squares, linewidth=5)  # linewidth 指定线条的宽度
+
+   # 下面的部分同上
+
+使用scatter绘制散点图
+~~~~~~~~~~~~~~~~~~~~~
+
+绘制一个点，x值是2，y值是4。
+
+.. code:: py
+
+   import matplotlib.pyplot as plt
+
+   plt.scatter(2, 4, s=200)  # s指定点的大小
+
+   plt.title('Square Numbers', fontsize=24)
+   plt.xlabel('Value', fontsize=24)
+   plt.ylabel('Square of Value', fontsize=24)
+
+   plt.tick_params(axis='both', labelsize=24)
+
+   plt.show()
+
+要绘制一系列点，也可以像plot那样传递两个列表
+
+.. code:: py
+
+   import matplotlib.pyplot as plt
+
+   x_values = [1, 2, 3, 4, 5]
+   y_values = [1, 4, 9, 16, 25]
+   plt.scatter(x_values, y_values, s=200)
+
+   # 下面的部分同上
+
+我们可以使用axis方法来指定x和y的显示范围
+
+.. code:: py
+
+   import matplotlib.pyplot as plt
+
+   x_values = list(range(1, 1001))
+   y_values = [x ** 2 for x in x_values]
+
+   plt.scatter(x_values, y_values, edgecolors='none', s=40)  # edgecolors设置为none，不显示点的黑边
+   plt.axis([0, 1100, 0, 1100000])
+
+   plt.show()
+
+自动保存图片
+~~~~~~~~~~~~
+
+要让程序自动把图片保存。可以用\ ``plt.savefig()``\ 来代替\ ``plt.show()``\ 。
+
+随机游走
+~~~~~~~~
+
+这是一个好玩的例子
+
+.. code:: py
+
+   from random import choice
+
+   import matplotlib.pyplot as plt
+
+
+   class RandomWalk:
+
+       def __init__(self, num_points=5000):
+           self.num_points = num_points
+
+           # 从(0, 0)开始
+           self.x_values = [0]
+           self.y_values = [0]
+
+       def fill_walk(self):
+           while len(self.x_values) < self.num_points:
+               x_direction = choice([1, -1])
+               x_distance = choice([0, 1, 2, 3, 4])
+               x_step = x_direction * x_distance
+
+               y_direction = choice([1, -1])
+               y_distance = choice([0, 1, 2, 3, 4])
+               y_step = y_direction * y_distance
+
+               # 拒绝原地踏步
+               if x_step == 0 and y_step == 0:
+                   continue
+
+               # 计算下一个点的x和y值
+               next_x = self.x_values[-1] + x_step
+               next_y = self.y_values[-1] + y_step
+
+               self.x_values.append(next_x)
+               self.y_values.append(next_y)
+
+
+   while True:
+       rw = RandomWalk()
+       rw.fill_walk()
+
+       point_numbers = list(range(rw.num_points))
+       plt.scatter(rw.x_values, rw.y_values, c=point_numbers, cmap=plt.cm.Blues, s=15)
+       plt.show()
+
+       keep_running = input('Make another walk? (y/n): ')
+       if keep_running == 'n':
+           break
