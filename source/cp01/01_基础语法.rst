@@ -4,23 +4,57 @@
 1.1 字符串
 ----------
 
-字符串的三个方法：
+原始字符串
+~~~~~~~~~~
+
+以r开头的字符串会忽视其中的转义，\ ``\``\ 会被认为是字符换的一部分。
+
+.. code:: py
+
+   >>> print(r'123\'123')
+   123\'123
+
+字符串常用方法
+~~~~~~~~~~~~~~
+
+字符串的三个方法（注意这三个字符串并不改变原始字符串，而是返回一个新的字符串）：
 
 -  title()：单词首字母大写
 -  upper()：大写
 -  lower()：小写
 
-.. code:: python
+isX的方法。这些方法都返回布尔值
 
-   >>> name = "leo sirius"
-   >>> name.title()
-   'Leo Sirius'
-   >>> name.upper()
-   'LEO SIRIUS'
-   >>> name.lower()
-   'leo sirius'
-   >>> name
-   'leo sirius'        # 注意name串自身不变
+-  isupper()：字符串中至少有一个字母，且所有字母都是大写
+-  islower()：字符串中至少有一个字母，且所有字母都是小写
+-  isalpha()：字符串中只包含字母，且非空
+-  isdecimal()：字符串中只包含数字，且非空
+-  isalnum()：字符串中只包含字母或数字，且非空
+-  isspace()：字符串中只包含空格、制表符或换行，且非空
+-  istitle()：字符串是title()转换返回的格式
+
+判断开始和结尾是否包含某子串的方法
+
+-  startswith()
+-  endswith()
+
+拼接和拆分join, split
+
+join作用的字符串是拼接的字符，而参数值要拼接的内容
+
+.. code:: py
+
+   >>> ', '.join(['cats', 'rats', 'bats'])
+   'cats, rats, bats'
+
+split和join正好相反，默认按照空格拆分
+
+.. code:: py
+
+   >>> 'my name is leo sirius'.split()
+   ['my', 'name', 'is', 'leo', 'sirius']
+   >>> 'my name is leo sirius'.split('m')
+   ['', 'y na', 'e is leo sirius']
 
 1.2 列表
 --------
