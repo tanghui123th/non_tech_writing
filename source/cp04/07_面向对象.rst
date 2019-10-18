@@ -459,9 +459,14 @@ DOM 对象，因为f方法是在按钮对象的环境中被调用的。
 2.5 绑定this的方法
 ~~~~~~~~~~~~~~~~~~
 
+-  Function.prototype.call()
+-  Function.prototype.apply()
+-  Function.prototype.bind()
+
 为了避免this指代不清，我们可以显式的指明this
 
--  Function.prototype.call()
+Function.prototype.call()
+'''''''''''''''''''''''''
 
 函数实例的call方法，可以指定函数内部this的指向（即函数执行时所在的作用域），然后在所指定的作用域中，调用该函数。call方法的参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象。
 
@@ -489,6 +494,57 @@ DOM 对象，因为f方法是在按钮对象的环境中被调用的。
 
 call方法还可以接受多个参数。第一个参数就是this所要指向的那个对象，后面的参数则是函数调用时所需的参数。
 
--  Function.prototype.apply()
+Function.prototype.apply()
+''''''''''''''''''''''''''
 
--  Function.prototype.bind()
+apply方法的作用与call方法类似，也是改变this指向，然后再调用该函数。唯一的区别就是，它接收一个数组作为函数执行时的参数。
+
+Function.prototype.bind()
+'''''''''''''''''''''''''
+
+bind方法用于将函数体内的this绑定到某个对象，然后返回一个新函数。
+
+下面代码中，我们将d.getTime方法赋给变量print，然后调用print就报错了。这是因为getTime方法内部的this，绑定Date对象的实例，赋给变量print以后，内部的this已经不指向Date对象的实例了。
+
+.. code:: js
+
+   var d = new Date();
+   d.getTime() // 1481869925657
+
+   var print = d.getTime;
+   print() // Uncaught TypeError: this is not a Date object.
+
+bind方法可以解决这个问题。
+
+.. code:: js
+
+   var print = d.getTime.bind(d);
+   print() // 1481869925657
+
+下面的例子把this绑定到其他对象。
+
+.. code:: js
+
+   var counter = {
+     count: 0,
+     inc: function () {
+       this.count++;
+     }
+   };
+
+   var obj = {
+     count: 100
+   };
+   var func = counter.inc.bind(obj);
+   func();
+   obj.count // 101
+
+7.3 对象的继承
+--------------
+
+传统上，JavaScript 语言的继承不通过
+class，而是通过“原型对象”（prototype）实现，本章介绍 JavaScript
+的原型链继承。
+
+3.1 原型对象概述
+~~~~~~~~~~~~~~~~
