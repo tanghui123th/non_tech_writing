@@ -140,7 +140,7 @@ define除了替换数值字面值常量外，还可以替换代码文本。如�
    #if   defined(OPTION_A)
        stuff needed for option A
    #elif defined(OPTION_B)
-       stuff needed ofr option B
+       stuff needed for option B
    #else
        #error No option selected!
    #endif
