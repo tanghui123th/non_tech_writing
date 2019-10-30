@@ -1,17 +1,18 @@
-ef6 1 ES6简介
+es6 1 ES6简介
 =============
 
 1.1 Babel转码器
 ---------------
 
-Babel可以用下面的命令安装
+Babel 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5
+代码，从而在现有环境执行。除了Babel之外，还有Google的Traceur转码器，也可以将
+ES6 代码转为 ES5 代码。
+
+安装Babel
 
 ::
 
    $ npm install --save-dev @babel/core
-
-Babel 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5
-代码，从而在现有环境执行。
 
 .. code:: js
 
