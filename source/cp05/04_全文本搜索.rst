@@ -46,8 +46,7 @@ Match指定被搜索的列，Against指定要使用的搜索表达式。注意�
 
 .. code:: sql
 
-   SELECT note_text, 
-                Match(note_text) Against('rabbit') AS rank
+   SELECT note_text, Match(note_text) Against('rabbit') AS rank
    FROM productnotes;
 
 注意这里是在SELECT中使用，而不是WHERE中。可以看到不包含rabbit的列值是0。
