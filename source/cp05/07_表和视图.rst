@@ -1,0 +1,89 @@
+7 表和视图
+==========
+
+7.1 创建表
+----------
+
+AUTO_INCREMENT
+~~~~~~~~~~~~~~
+
+每个表只允许一个AUTO_INCREMENT列，而且它必须被索引（如，让它成为主键）
+
+引擎类型
+~~~~~~~~
+
+几种引擎：
+
+-  InnoDB：支持事务处理，不支持全文本搜索
+-  MyISAM：支持全文本搜索，不支持事务处理，性能高
+-  MEMORY：功能桐楠格MyISAM，且数据存在内存中，速度快（适合临时表）
+
+注意，外键不能跨引擎。
+
+7.2 更新表 ALTER TABLE
+----------------------
+
+``ALTER TABLE``\ 要极为小心，应该在改动前进行一个完整的备份（包括数据和模式）。
+
+添加一个列
+~~~~~~~~~~
+
+.. code:: sql
+
+   ALTER TABLE vendors
+   ADD vend_phone CHAR(20);
+
+删除一个列
+~~~~~~~~~~
+
+.. code:: sql
+
+   ALTER TABLE vendors
+   DROP COLUMN vend_phone;
+
+添加外键
+~~~~~~~~
+
+.. code:: sql
+
+   ALTER TABLE orders
+   ADD CONSTRAINT fk_orderitems_products FOREIGN KEY (cust_id)
+   REFERENCES customers (cust_id);
+
+7.3 删除表
+----------
+
+.. code:: sql
+
+   DROP TABLE customers;
+
+7.4 重命名表
+------------
+
+.. code:: sql
+
+   ALTER TABLE customers2 TO customers;
+
+7.5 视图
+--------
+
+概述
+~~~~
+
+视图是虚拟的表。视图只包含使用时动态检索数据的查询。
+
+由于视图本身不包含数据，它们返回的数据是从其他表中检索出来的。在每次使用视图时，都必须处理查询执行时所需的检索。所以在大量使用视图时，一定要注意性能问题。
+
+使用视图的规则和限制：
+
+-  视图可以嵌套
+-  视图不能索引，不能有关联的触发器或默认值
+-  视图可以和表一起使用
+
+视图语句
+~~~~~~~~
+
+-  ``CREATE VIEW`` 创建视图
+-  ``SHOW CREATE VIEW viewname`` 查看创建视图的语句
+-  ``DROP VIEW viewname`` 删除视图
+-  ``CREATE OR REPLACE VIEW`` 更新视图
