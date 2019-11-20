@@ -16,7 +16,7 @@ AUTO_INCREMENT
 
 -  InnoDB：支持事务处理，不支持全文本搜索
 -  MyISAM：支持全文本搜索，不支持事务处理，性能高
--  MEMORY：功能桐楠格MyISAM，且数据存在内存中，速度快（适合临时表）
+-  MEMORY：功能同MyISAM，但数据存在内存中，速度快（适合临时表）
 
 注意，外键不能跨引擎。
 
@@ -87,3 +87,113 @@ AUTO_INCREMENT
 -  ``SHOW CREATE VIEW viewname`` 查看创建视图的语句
 -  ``DROP VIEW viewname`` 删除视图
 -  ``CREATE OR REPLACE VIEW`` 更新视图
+
+视图使用1-简化复杂的联结
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: sql
+
+   CREATE VIEW productcustomers AS
+   SELECT cust_name, cust_contact, prod_id
+   FROM customers, orders, orderitems
+   WHERE customers.cust_id = orders.cust_id
+     AND orderitems.order_num = orders.order_num;
+
+我们现在可以直接使用productcustomers这个视图
+
+.. code:: sql
+
+   mysql> SELECT * FROM productcustomers;
+   +----------------+--------------+---------+
+   | cust_name      | cust_contact | prod_id |
+   +----------------+--------------+---------+
+   | Coyote Inc.    | Y Lee        | ANV01   |
+   | Coyote Inc.    | Y Lee        | ANV02   |
+   | Coyote Inc.    | Y Lee        | TNT2    |
+   | Coyote Inc.    | Y Lee        | FB      |
+   | Coyote Inc.    | Y Lee        | FB      |
+   | Coyote Inc.    | Y Lee        | OL1     |
+   | Coyote Inc.    | Y Lee        | SLING   |
+   | Coyote Inc.    | Y Lee        | ANV03   |
+   | Wascals        | Jim Jones    | JP2000  |
+   | Yosemite Place | Y Sam        | TNT2    |
+   | E Fudd         | E Fudd       | FC      |
+   +----------------+--------------+---------+
+
+使用视图2-重新格式化检索出的数据
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: sql
+
+   CREATE VIEW vendorlocations AS
+   SELECT Concat(RTrim(vend_name), ' (', RTrim(vend_country), ')') AS vend_title
+   FROM vendors
+   ORDER BY vend_name;
+
+.. code:: sql
+
+   mysql> SELECT * FROM vendorlocations;
+   +-------------------------+
+   | vend_title              |
+   +-------------------------+
+   | ACME (USA)              |
+   | Anvils R Us (USA)       |
+   | Furball Inc. (USA)      |
+   | Jet Set (England)       |
+   | Jouets Et Ours (France) |
+   | LT Supplies (USA)       |
+   +-------------------------+
+
+使用视图3-过滤掉不想要的数据
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: sql
+
+   CREATE VIEW customeremaillist AS
+   SELECT cust_id, cust_name, cust_email
+   FROM customers
+   WHERE cust_email IS NOT NULL;
+
+.. code:: sql
+
+   mysql> SELECT * FROM customeremaillist;
+   +---------+----------------+---------------------+
+   | cust_id | cust_name      | cust_email          |
+   +---------+----------------+---------------------+
+   |   10001 | Coyote Inc.    | ylee@coyote.com     |
+   |   10003 | Wascals        | rabbit@wascally.com |
+   |   10004 | Yosemite Place | sam@yosemite.com    |
+   +---------+----------------+---------------------+
+
+使用视图4-简化计算字段
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: sql
+
+   CREATE VIEW orderitemsexpanded AS
+   SELECT order_num,
+          prod_id,
+          quantity,
+          item_price,
+          quantity*item_price AS expanded_price
+   FROM orderitems;
+
+.. code:: sql
+
+   mysql> SELECT * FROM orderitemsexpanded
+       -> WHERE order_num = 20005;
+   +-----------+---------+----------+------------+----------------+
+   | order_num | prod_id | quantity | item_price | expanded_price |
+   +-----------+---------+----------+------------+----------------+
+   |     20005 | ANV01   |       10 |       5.99 |          59.90 |
+   |     20005 | ANV02   |        3 |       9.99 |          29.97 |
+   |     20005 | TNT2    |        5 |      10.00 |          50.00 |
+   |     20005 | FB      |        1 |      10.00 |          10.00 |
+   +-----------+---------+----------+------------+----------------+
+
+关于更新视图
+~~~~~~~~~~~~
+
+更新（insert、update、delete）一个视图将更新其基表（因为视图本身不存储数据）。如果MySQL不能正确的确定被更新的基数据，则不允许更新。
+
+一般的，应将视图用于检索（select），而不是更新（insert，update，delete）
