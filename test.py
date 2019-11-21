@@ -1,11 +1,19 @@
-class C1:
-    value = 1
+import threading
+import datetime
+import time
 
-class C2:
-    value = 2
+class MyThread(threading.Thread):
+    def run(self):
+        time.sleep(2)
+        
 
-class A(C1, C2):
-    pass
-
-a = A()
-print('a.value = {}'.format(a.value))
+if __name__ == '__main__':
+    print('=== time = {}'.format(datetime.datetime.now()))
+    t_dict = {}
+    for i in range(1000):
+        t_dict[str(i)] = MyThread()
+        t_dict[str(i)].start()
+        
+    for i in range(1000):
+        t_dict[str(i)].join()
+    print('=== time = {}'.format(datetime.datetime.now()))
