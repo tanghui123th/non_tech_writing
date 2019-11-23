@@ -142,3 +142,84 @@ MySQL确定字符集和校对的规则：
 
    SELECT * FROM customers
    ORDER BY lastname, firstname COLLATE latin1_general_cs;
+
+9.3 安全管理
+------------
+
+MySQL用户账号和信息存储在名为mysql的数据库中。但一般不建议直接操作mysql数据库。
+
+创建用户
+~~~~~~~~
+
+.. code:: sql
+
+   CREATE USER ben IDENFITED BY 'password'
+
+重名命
+
+.. code:: sql
+
+   RENAME USER ben TO beforta;
+
+删除用户
+~~~~~~~~
+
+.. code:: sql
+
+   DROP USER beforta;
+
+设置访问权限
+~~~~~~~~~~~~
+
+.. code:: sql
+
+   mysql> SHOW GRANTS FOR beforta;
+   +-------------------------------------+
+   | Grants for beforta@%                |
+   +-------------------------------------+
+   | GRANT USAGE ON *.* TO 'beforta'@'%' |
+   +-------------------------------------+
+
+可以看到beforta对\ ``*.*``\ 有USAGE权限，\ ``*.*``\ 其实表示什么都没有。另外这里用户定义为\ ``user@host``\ 的形式，host不指定的话默认为%。下面为beforta赋予在\ ``mnysql_crash_course``\ 进行select的权限。
+
+.. code:: sql
+
+   mysql> GRANT SELECT ON mysql_crash_course.* TO beforta;
+   Query OK, 0 rows affected (0.01 sec)
+
+   mysql> SHOW GRANTS FOR beforta;
+   +----------------------------------------------------------+
+   | Grants for beforta@%                                     |
+   +----------------------------------------------------------+
+   | GRANT USAGE ON *.* TO 'beforta'@'%'                      |
+   | GRANT SELECT ON `mysql_crash_course`.* TO 'beforta'@'%'  |
+   +----------------------------------------------------------+
+
+revoke可以撤销权限
+
+.. code:: sql
+
+   REVOKE SELECT ON myqsl_crash_course.* FROM beforta;
+
+GRANT和REVOKE可以在几个层次上控制访问权限：
+
+-  整个服务器，使用\ ``GRANT ALL;``\ 和\ ``REVOKE ALL;``
+-  整个数据库，使用\ ``ON database_name.*;``
+-  特定的表，使用\ ``ON database_name.table_name;``
+-  特定的列
+-  特定的存储过程
+
+更改密码
+~~~~~~~~
+
+创建用户时我们用的是纯文本，更改密码时必须用Password函数对纯文本进行加密。
+
+.. code:: sql
+
+   SET PASSWORD FOR beforta = Password('new_password');
+
+直接设置当前用户的密码
+
+.. code:: sql
+
+   SET PASSWORD = Password('new_passord');
