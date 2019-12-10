@@ -159,3 +159,6 @@ int main()
     exit(EXIT_SUCCESS);
 }
 ```
+
+如果你觉得本笔记对你有所帮助，欢迎转载分享给更多的人。请注明出处哦~
+最后欢迎star [github仓库](https://github.com/LeoSirius/notes)
