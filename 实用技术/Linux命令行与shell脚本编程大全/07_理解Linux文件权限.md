@@ -172,3 +172,7 @@ $ chgrp group_shared file
 ## 7.5 共享文件
 
 linux中用户之间共享文件是通过组来实现的。
+
+
+如果你觉得本笔记对你有所帮助，欢迎转载分享给更多的人。请注明出处哦~
+最后欢迎star [github仓库](https://github.com/LeoSirius/notes)
