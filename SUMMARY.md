@@ -1,5 +1,6 @@
 * [Introduction](README.md)
 * [实用技术](实用技术/)
   * [Linux命令行与shell脚本编程大全](Linux命令行与shell脚本编程大全/)
+    * [01_初识linux_shell](01_初识linux_shell.md)
 * [编程语言](编程语言/)
 * [计算机科学](计算机科学/)
