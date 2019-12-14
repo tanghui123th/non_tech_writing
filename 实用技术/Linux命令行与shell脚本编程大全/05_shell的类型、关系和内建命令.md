@@ -4,6 +4,8 @@
 
 默认的交互shell会在用户登录时启动。还有另外一个默认shell是/bin/sh，它作为默认的系统shell，用于那些需要在系统启动时使用的系统shell脚本。CentOS将/bin/sh软连接到bash，ubuntu则软连接到dash。
 
+所以构建shell脚本的时候最好在第一行注释写清楚需要使用的shell。
+
 ## 5.2 shell的父子关系
 
 生成子shell时，只有部分父进程的环境被复制到了子shell环境中。
@@ -12,7 +14,7 @@
 
 在一行中输入多条命令依次执行，可以用命令列表实现
 
-```
+```bash
 leo@192 ~ $ pwd ; ls ; cd /etc ; pwd ; cd  ; pwd ; ls
 /Users/leo
 Desktop       Downloads     Library       Music         Postman       Seafile       dev
@@ -25,7 +27,7 @@ Documents     Github        Movies        Pictures      Public        YouComplet
 
 进程列表就是用括号包围起来的一组命令，它能够创建子shell来执行这些命令。`echo $BASH_SUBSHELL`输出0，表示没有子shell。输出更大的数字，则表示有子shell。
 
-```
+```bash
 leo@192 ~ $ echo $BASH_SUBSHELL
 0
 leo@192 ~ $ ( pwd ; echo $BASH_SUBSHELL)
@@ -44,7 +46,7 @@ leo@192 ~ $ ( pwd ; (echo $BASH_SUBSHELL ))
 
 在命令末尾加&可以让命令在后台运行
 
-```
+```bash
 leo@192 ~ $ sleep 10 &
 [1] 75060
 leo@192 ~ $ jobs
@@ -68,7 +70,7 @@ leo@192 ~ $ jobs -l
 
 协程同时做了两件事情：在后台生成一个子shell，在这个子shell中执行命令
 
-```
+```bash
 root@a57436bf6370:~# coproc sleep 10
 [1] 17155     # 作业号和进程ID
 root@a57436bf6370:~# jobs
@@ -77,7 +79,7 @@ root@a57436bf6370:~# jobs
 
 COPROC是默认的进程名字，如果要自定义进程名，可以用下面的语法
 
-```
+```bash
 root@a57436bf6370:~# coproc My_Job { sleep 10; }
 [1] 17163
 root@a57436bf6370:~# jobs
@@ -96,7 +98,7 @@ root@a57436bf6370:~# jobs
 
 注意有些命令有多种实现，如echo和pwd既有内建命令，也有外部命令。type -a会显示命令的两种实现，而which只会显示外部命令文件。
 
-```
+```bash
 root@a57436bf6370:~# type -a echo
 echo is a shell builtin
 echo is /bin/echo
@@ -123,7 +125,7 @@ root@a57436bf6370:~#
 
 要执行历史记录中的命令，可以用惊叹号加编号
 
-```
+```bash
 root@a57436bf6370:~# history
     1  run.sh fetch
     2  run.sh compile
@@ -146,7 +148,7 @@ scripts
 
 这是另一条内建命令，可以创建别名。选项-p可以查看已有的别名
 
-```
+```bash
 root@a57436bf6370:~# alias -p
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'

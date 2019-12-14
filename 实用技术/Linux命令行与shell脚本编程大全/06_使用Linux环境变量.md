@@ -90,7 +90,7 @@ PATH=$PATH:/home/leo/scripts
 
 我们直接来看用法
 
-```
+```bash
 leo@192 ~ $ mytest=(one two three four five)
 leo@192 ~ $ echo $mytest
 one
@@ -107,6 +107,7 @@ leo@192 ~ $ echo ${mytest[3]}
 four
 leo@192 ~ $ unset mytest
 leo@192 ~ $ echo ${mytest[*]}
+
 ```
 
 如果你觉得本笔记对你有所帮助，欢迎转载分享给更多的人。请注明出处哦~
