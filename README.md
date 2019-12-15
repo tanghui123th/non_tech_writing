@@ -1,4 +1,15 @@
-目前笔记分成三类：
+笔记按主题分成下面几类
+
+[![Author](https://img.shields.io/badge/Author-LeoSirius-blueviolet?style=flat-square)](https://.com) [![Email](https://img.shields.io/badge/Email%20Me-is.li.xiaoyu%40qq.com-orange?style=flat-square)](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=3LWv8rC18qS1vbOlqZytrfK-s7E)
+
+|目录 | 描述|
+|:-|:-|
+|编程语言|按照编程语言分类|
+|实用技术|开发中用到的实际技术，如Linux相关、Nginx、Django等|
+|计算机科学|计算机科学这门学科的基础知识|
+|人文社科|人文社会科学，包括商科。即除理工科外的广义文科的笔记|
+|哲学沉思录|字面上意义的哲学|
+
 
 - 编程语言
   - c
@@ -22,5 +33,3 @@
   - 数据库系统概念
   - bobo机器学习课程笔记
   - bobo线性代数课程笔记
-
-为了更好的阅读体验，欢迎到我的[语雀](https://www.yuque.com/leosirius)页面去阅读~
