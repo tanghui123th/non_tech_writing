@@ -1,6 +1,6 @@
 * [Introduction](README.md)
 * [实用技术](实用技术/)
-  * [Linux命令行与shell脚本编程大全]()
+  * [Linux命令行与shell脚本编程大全]
     * [01_初识linux_shell](/实用技术/Linux命令行与shell脚本编程大全/01_初识linux_shell.md)
     * [04_进程、挂载和数据处理命令](/实用技术/Linux命令行与shell脚本编程大全/04_进程、挂载和数据处理命令.md)
     * [05_shell的类型、关系和内建命令](/实用技术/Linux命令行与shell脚本编程大全/05_shell的类型、关系和内建命令.md)
