@@ -10,20 +10,20 @@
 
 
 - 编程语言
-  - c
-  - cpp
-  - go
-  - html&css
-  - javascript
-  - mysql
+  - [c](编程语言/c/)
+  - [cpp](编程语言/cpp/)
+  - [go](编程语言/go/)
+  - [html&css](编程语言/html&css/)
+  - [javascript](编程语言/javascript/)
+  - [mysql](编程语言/mysql/)
   - [python](编程语言/python/)
 
 - 实用技术
-  - [Linux命令行与shell脚本编程大全](https://www.yuque.com/leosirius/howv6m)
-  - [Linux程序设计](https://www.yuque.com/leosirius/czuvh4)
-  - vim
-  - 深入理解Nginx
-  - other_tools
+  - [Linux命令行与shell脚本编程大全](实用技术/Linux命令行与shell脚本编程大全/)
+  - [Linux程序设计](实用技术/Linux程序设计/)
+  - [vim](实用技术/vim/)
+  - [深入理解Nginx](实用技术/深入理解Nginx/)
+  - [other_tools](实用技术/other_tools/)
 
 - 计算机科学
   - 操作系统
