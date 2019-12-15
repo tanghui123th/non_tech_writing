@@ -1,5 +1,3 @@
-笔记按主题分成下面几类
-
 [![Author](https://img.shields.io/badge/Author-LeoSirius-blueviolet.svg?style=flat-square)](http://leosirius.com) [![Email](https://img.shields.io/badge/Email%20Me-is.li.xiaoyu%40qq.com-orange.svg?style=flat-square)](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=3LWv8rC18qS1vbOlqZytrfK-s7E)
 
 |目录 | 描述|
@@ -18,7 +16,7 @@
   - html&css
   - javascript
   - mysql
-  - [python](https://www.yuque.com/leosirius/xb1abm)
+  - [python](编程语言/python/)
 
 - 实用技术
   - [Linux命令行与shell脚本编程大全](https://www.yuque.com/leosirius/howv6m)
