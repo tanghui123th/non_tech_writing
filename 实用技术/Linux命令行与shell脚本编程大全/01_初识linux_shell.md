@@ -127,6 +127,3 @@ man命令用来访问存储在linux系统的上手册。全部手册按内容分
 - man：是linux的系统手册
 - info：可显示更完整的最新的GNU工具信息
 - help：本身不是独立的工具，而是作为命令的选项存在
-
-如果你觉得本笔记对你有所帮助，欢迎转载分享给更多的人。请注明出处哦~
-最后欢迎star [github仓库](https://github.com/LeoSirius/notes)
