@@ -39,6 +39,8 @@ The square of 10 is 100
 
 ### 方括号
 
+### 双方括号
+
 ```bash
 #!/bin/bash
 # using patter matching
