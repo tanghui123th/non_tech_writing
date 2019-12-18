@@ -16,7 +16,7 @@
   - [go](编程语言/go/)
   - [html&css](编程语言/html&css/)
   - [javascript阮一峰](编程语言/javascript阮一峰/)
-  - [javascript高级程序设计](/编程语言/javascript高级程序设计/01_js简介_02_在html中使用js.md)
+  - [javascript高级程序设计](/编程语言/javascript高级程序设计/)
   - [mysql](编程语言/mysql/)
   - [python](编程语言/python/)
 

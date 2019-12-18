@@ -1,7 +1,8 @@
 - [Introduction](README.md)
 - 编程语言
-  - javascriptga高级程序设计
+  - javascript高级程序设计
     - [01_js简介_02_在html中使用js](编程语言/javascript高级程序设计/01_js简介_02_在html中使用js.md)
+    - [03_基本概念](编程语言/javascript高级程序设计/03_基本概念.md)
 - 实用技术
   - Linux命令行与shell脚本编程大全
     - [01_初识linux_shell](实用技术/Linux命令行与shell脚本编程大全/01_初识linux_shell.md)
