@@ -1,8 +1,13 @@
-- [Introduction](README.md)
 - 编程语言
+  - c
+  - cpp
+  - go
+  - html&css
+  - javascript阮一峰
   - javascript高级程序设计
-    - [01_js简介_02_在html中使用js](编程语言/javascript高级程序设计/01_js简介_02_在html中使用js.md)
-    - [03_基本概念](编程语言/javascript高级程序设计/03_基本概念.md)
+  - mysql
+  - python
+
 - 实用技术
   - Linux命令行与shell脚本编程大全
     - [01_初识linux_shell](实用技术/Linux命令行与shell脚本编程大全/01_初识linux_shell.md)
@@ -16,8 +21,23 @@
     - [12_使用结构化命令](实用技术/Linux命令行与shell脚本编程大全/12_使用结构化命令.md)
     - [13_更多的结构化命令](实用技术/Linux命令行与shell脚本编程大全/13_更多的结构化命令.md)
     - [a_bash括号总结](实用技术/Linux命令行与shell脚本编程大全/a_bash括号总结.md)
+  - Linux程序设计
+  - vim
+  - 深入理解Nginx
+  - other_tools
+
 - 计算机科学
+  - 操作系统
+  - 计算机网络
+  - 数据库系统概念
+  - bobo机器学习课程笔记
+  - bobo线性代数课程笔记
+
 - 人文社科
+  - 西方经济学
+  - 金融市场基础知识（证券从业资格考试）
+  - 简史三部曲
+
 - 采集
   - 后端
     - [01_node](采集/后端/01_node.md)
