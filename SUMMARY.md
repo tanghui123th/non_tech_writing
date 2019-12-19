@@ -10,6 +10,9 @@
       - [01_js简介_02_在html中使用js](编程语言/javascript/javascript高级程序设计/01_js简介_02_在html中使用js.md)
       - [03_基本概念](编程语言/javascript/javascript高级程序设计/03_基本概念.md)
 
+    - es6
+      - [01_es6总结介绍](编程语言/javascript/es6/01_es6总结介绍.md)
+
   - mysql
   - python
 
