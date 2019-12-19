@@ -3,11 +3,12 @@
   - cpp
   - go
   - html&css
-  - javascript阮一峰
+  - javascript
+    - javascript阮一峰
 
-  - javascript高级程序设计
-    - [01_js简介_02_在html中使用js](编程语言/javascript高级程序设计/01_js简介_02_在html中使用js.md)
-    - [03_基本概念](编程语言/javascript高级程序设计/03_基本概念.md)
+    - javascript高级程序设计
+      - [01_js简介_02_在html中使用js](编程语言/javascript/javascript高级程序设计/01_js简介_02_在html中使用js.md)
+      - [03_基本概念](编程语言/javascript/javascript高级程序设计/03_基本概念.md)
 
   - mysql
   - python
