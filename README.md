@@ -16,7 +16,11 @@
   - go
   - html&css
   - javascript阮一峰
+
   - javascript高级程序设计
+    - [01_js简介_02_在html中使用js](编程语言/javascript高级程序设计/01_js简介_02_在html中使用js.md)
+    - [03_基本概念](编程语言/javascript高级程序设计/03_基本概念.md)
+
   - mysql
   - python
 
@@ -33,6 +37,7 @@
     - [12_使用结构化命令](实用技术/Linux命令行与shell脚本编程大全/12_使用结构化命令.md)
     - [13_更多的结构化命令](实用技术/Linux命令行与shell脚本编程大全/13_更多的结构化命令.md)
     - [a_bash括号总结](实用技术/Linux命令行与shell脚本编程大全/a_bash括号总结.md)
+
   - Linux程序设计
   - vim
   - 深入理解Nginx
