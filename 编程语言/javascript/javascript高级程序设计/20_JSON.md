@@ -93,7 +93,6 @@ var jsonText = JSON.stringify(person);
 // "hahah"
 ```
 
-
 ## 20.3 parse()
 
 解析的第二个参数是一个函数，可以用来自定义解析。类似于stringify的过滤器函数，只不过方向反了过来。
