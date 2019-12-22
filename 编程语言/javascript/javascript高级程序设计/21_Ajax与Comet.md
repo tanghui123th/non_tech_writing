@@ -1,6 +1,6 @@
 # 21 Ajax与Comet
 
-Ajax是`Asynchronous JavaScript + XML`的缩写。虽然名字中有XML，但Ajax通信与数据格式无关。这种技术能够向服务器请求额外的数据而无需卸载页面。Ajax的核心是XMLHttpPRequest
+Ajax是`Asynchronous JavaScript + XML`的缩写。虽然名字中有XML，但Ajax通信与数据格式无关。这种技术能够向服务器请求额外的数据而无需卸载页面。Ajax的核心是XMLHttpRequest
 
 ## 21.1 XMLHttpRequest对象
 
