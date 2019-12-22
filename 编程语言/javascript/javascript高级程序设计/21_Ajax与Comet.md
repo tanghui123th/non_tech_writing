@@ -118,3 +118,7 @@ xhr.send(null);
 - loadend
 
 每个请求都从loadstart开始，接下来是一个或多个progress事件，然后触发error、abort、load中的一个，最后触发loadend
+
+## 21.4 跨域资源共享
+
+现代浏览器XHR大多都实现了对CORS的原生支持，见[01 跨域请求](实用技术/web开发常见问题/01_跨域请求.md)。
