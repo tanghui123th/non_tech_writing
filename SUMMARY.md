@@ -41,7 +41,7 @@
   - WebSocket
     - [01_start](实用技术/WebSocket/01_start.md)
   - web开发常见问题
-    - [01_跨域请求](实用技术/web开发常见问题/01_跨域请求.md)
+    - [01 跨域请求](实用技术/web开发常见问题/01_跨域请求.md)
   - other_tools
 
 - 计算机科学
