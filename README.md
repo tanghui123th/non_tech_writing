@@ -44,6 +44,8 @@
 
   - mysql
   - python
+    - Fluent Python
+      - [01 Python数据模型](编程语言/python/Fluent_Python/01_Python数据模型.md)
     - 简单总结
       - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
       - [02 标准库](编程语言/python/简单总结/02_标准库.md)
