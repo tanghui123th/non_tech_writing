@@ -38,12 +38,20 @@
       - [05 引用类型](编程语言/javascript/javascript高级程序设计/05_引用类型.md)
       - [20 JSON](编程语言/javascript/javascript高级程序设计/20_JSON.md)
       - [21 Ajax与Comet](编程语言/javascript/javascript高级程序设计/21_Ajax与Comet.md)
-    
+
     - es6
       - [01 es6总结介绍](编程语言/javascript/es6/01_es6总结介绍.md)
 
   - mysql
   - python
+    - 简单总结
+      - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
+      - [02 标准库](编程语言/python/简单总结/02_标准库.md)
+      - [03 数据可视化](编程语言/python/简单总结/03_数据可视化.md)
+      - [04 面向对象](编程语言/python/简单总结/04_面向对象.md)
+      - [05 魔法函数](编程语言/python/简单总结/05_魔法函数.md)
+      - [06 函数式编程](编程语言/python/简单总结/06_函数式编程.md)
+      - [07 迭代器 生成器](编程语言/python/简单总结/07_迭代器_生成器.md)
 
 - 实用技术
   - Linux
