@@ -33,6 +33,15 @@
       - [01 es6总结介绍](编程语言/javascript/es6/01_es6总结介绍.md)
 
   - mysql
+    - mysql必知必会
+      - [01 基础操作](编程语言/mysql/mysql必知必会/01_基础操作.md)
+      - [02 计算](编程语言/mysql/mysql必知必会/02_计算.md)
+      - [03 多个表操作](编程语言/mysql/mysql必知必会/03_多个表操作.md)
+      - [04 全文本搜索](编程语言/mysql/mysql必知必会/04_全文本搜索.md)
+      - [06 增删改](编程语言/mysql/mysql必知必会/06_增删改.md)
+      - [07 表和视图](编程语言/mysql/mysql必知必会/07_表和视图.md)
+      - [08 存储过程 游标 触发器](编程语言/mysql/mysql必知必会/08_存储过程_游标_触发器.md)
+      - [09 事务 字符集和校对 安全管理 数据库维护](编程语言/mysql/mysql必知必会/09_事务_字符集和校对_安全管理_数据库维护.md)
   - python
     - Fluent Python
       - [01 Python数据模型](编程语言/python/Fluent_Python/01_Python数据模型.md)
