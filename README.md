@@ -55,6 +55,7 @@
   - python
     - Fluent Python
       - [01 Python数据模型](编程语言/python/Fluent_Python/01_Python数据模型.md)
+      - [05 First-Class Functions](编程语言/python/Fluent_Python/05_First-Class_Functions.md)
       - [14 Iterables Iterators Generators](编程语言/python/Fluent_Python/14_Iterables_Iterators_Generators.md)
     - 简单总结
       - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
