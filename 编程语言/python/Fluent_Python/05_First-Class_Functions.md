@@ -40,3 +40,66 @@ python3中，map和filter返回生成器，所以生成器表达式是它们的�
 
 - all(iterable)：所有元素为True，则返回True。`all([])`返回True
 - any(iterable)：存在一个元素为True，则返回TRue。`any([])`返回True
+
+## 5.2 匿名函数
+
+与在js中不同，python中的匿名函数不常用。由于语法限制，lambda表达式仅仅是个表达式，中间不能有赋值语句，不能有逻辑控制语句。lambda关键字同def一样，创建了一个函数对象。
+
+用lambda表达式重写前面水果按照最后一个字母的字典顺序排序
+
+```python
+>>> fruits = ['strawberry', 'fig', 'apple', 'cherry', 'raspberry', 'banana']
+>>> sorted(fruits, key=lambda word: word[::-1])
+['banana', 'apple', 'fig', 'raspberry', 'strawberry', 'cherry']
+```
+
+## 5.3 7种可调用对象
+
+- 用户自定义函数
+  用def或lambda创建
+- 内建函数
+  在CPython中，这些函数用c实现
+- 内建方法
+  CPython中用c实现，如dict.get
+- 方法
+  类中的方法
+- 类
+  先调用`__new__`，在调用`__init__`，返回类的一个实例
+- 类实例
+  如果一个类实现了`__call__`，则可以像函数一样被调用
+- 生成器函数
+
+判断一个对象是否可调用，用内建函数`callable()`
+
+```python
+>>> [callable(obj) for obj in (abs, str, 13)]
+[True, True, False]
+```
+
+## 5.3 自定义可调用类型
+
+python中函数是对象，那么反过来，对象也可以实现得像函数一样。下面的例子中`bingo()`是shortcut of `bingo.pick()`
+
+```python
+import random
+
+class BingoCage:
+
+    def __init__(self, items):
+        self._items = list(items)   # copy of items in local
+        random.shuffle(self._items)
+
+    def pick(self):
+        try:
+            return self._items.pop()
+        except IndexError:
+            raise LookupError('pick from empty BingoCage')
+
+    def __call__(self):
+        return self.pick()
+
+if __name__ == '__main__':
+    bingo = BingoCage(range(3))
+    print('bingo.pick() = {}'.format(bingo.pick()))
+    print('bingo() = {}'.format(bingo()))
+```
