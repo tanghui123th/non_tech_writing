@@ -100,7 +100,14 @@ if __name__ == '__main__':
 
 ## 5.5 函数内窥
 
-> `dir()`函数不带参数时，返回当前范围内的变量、方法和定义的类型列表；带参数时，返回参数的属性、方法列表
+首先介绍两个内建函数：`dir()`函数不带参数时，返回当前范围内的变量、方法和定义的类型列表；带参数时，返回参数的属性、方法列表。`vars()`与`dir()`的区别在于前者还要列出属性的值。
+
+```python
+>>> dir()
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
+>>> vars()
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>}
+```
 
 由于函数时对象，为了研究函数的个性，我们看看那些属性和方法是函数特有而对象没有的。
 
@@ -116,3 +123,29 @@ if __name__ == '__main__':
 
 除了以上列出的属性方法之外，还有一个`__dict__`属性用来存放用户赋予函数的属性。
 
+## 5.6 函数实参前加`**`
+
+```python
+def test(name, *args, **attrs):
+    print('name = {}'.format(name))
+    print('args = {}'.format(args))
+    print('attrs = {}'.format(attrs))
+
+if __name__ == '__main__':
+    params = {
+        'name': 'leo',
+        'age': 13,
+        'location': 'beijing',
+    }
+    test(**params)
+```
+
+`**`会把params拆开，如果其中的键值对的键是函数的参数名，则这个键的值会传给对应的参数，这里是name，剩下的键值对会被参数`**attrs`捕获
+
+输出
+
+```python
+name = leo
+args = ()
+attrs = {'age': 13, 'location': 'beijing'}
+```
