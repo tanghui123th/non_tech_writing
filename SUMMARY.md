@@ -66,6 +66,7 @@
       - [01 Python数据模型](编程语言/python/Fluent_Python/01_Python数据模型.md)
       - [05 First-Class Functions](编程语言/python/Fluent_Python/05_First-Class_Functions.md)
       - [06 第一类函数的设计模式](编程语言/python/Fluent_Python/06_第一类函数的设计模式.md)
+      - [08 对象引用 可变性 回收](编程语言/python/Fluent_Python/08_对象引用_可变性_回收.md)
       - [14 Iterables Iterators Generators](编程语言/python/Fluent_Python/14_Iterables_Iterators_Generators.md)
     - 简单总结
       - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
@@ -122,5 +123,5 @@
 
 - 英语文摘
   - 2019
-    - [August](英语文摘/2019/August.md)
+    - [08 August](英语文摘/2019/08_August.md)
 

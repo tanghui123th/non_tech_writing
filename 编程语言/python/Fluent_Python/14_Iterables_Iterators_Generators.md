@@ -59,7 +59,7 @@ word = nice
 word = day
 ```
 
-在上面的例子中，虽然我们的Sentence对象确实是可迭代对象，但是isinstance和issubclass这两个函数返回的是False。这时因为这两个函数是通过有没有__iter__来判断一个对象是不是可迭代的。
+在上面的例子中，虽然我们的Sentence对象确实是可迭代对象，但是isinstance和issubclass这两个函数返回的是False。这时因为这两个函数是通过有没有`__iter__`来判断一个对象是不是可迭代的。
 
 因此判断一个对象是否可迭代的最好方式，就是在迭代这个对象时使用try/catch，这样可以照顾到那些只实现了`__getitem__`的可迭代对象。
 
