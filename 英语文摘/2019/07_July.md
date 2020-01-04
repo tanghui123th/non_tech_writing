@@ -6,11 +6,12 @@
 
 ### Words
 
-- cross, angry
+#### cross
 
-```txt
+- angry
+
 If you have ever been really angered by rude customer service, you'll understand why Heikki Vaananen was still cross more than a decade later.
-```
+
 
 ### Summary
 
