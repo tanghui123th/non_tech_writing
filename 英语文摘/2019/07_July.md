@@ -15,7 +15,7 @@ If you have ever been really angered by rude customer service, you'll understand
 
 ### Summary
 
-Heikki, a Finnish programmer and entrepreneur, sold his video game business and founded `Happy Or Not`, a company that helps firms to monitor -- and then import -- the level of customer service they provide, in 2009.
+Heikki, a Finnish programmer and entrepreneur, sold his video game business and founded `Happy Or Not`, a company that helps firms to monitor -- and then improve -- the level of customer service they provide, in 2009.
 
 He was unhappy with local floppy disk store's customer service when he was young.
 
