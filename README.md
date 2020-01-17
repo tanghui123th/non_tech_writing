@@ -112,6 +112,17 @@
       - [a bash括号总结](实用技术/Linux/Linux命令行与shell脚本编程大全/a_bash括号总结.md)
 
     - Linux程序设计
+      - [01 入门](实用技术/Linux/Linux程序设计/01_入门.md)
+      - [02 shell程序设计](实用技术/Linux/Linux程序设计/02_shell程序设计.md)
+      - [03 文件操作](实用技术/Linux/Linux程序设计/03_文件操作.md)
+      - [04 linux环境](实用技术/Linux/Linux程序设计/04_linux环境.md)
+      - [05 终端](实用技术/Linux/Linux程序设计/05_终端.md)
+      - [06 使用基于curses函数库管理基于文本的屏幕](实用技术/Linux/Linux程序设计/06_使用基于curses函数库管理基于文本的屏幕.md)
+      - [07 数据管理](实用技术/Linux/Linux程序设计/07_数据管理.md)
+      - [09 开发工具](实用技术/Linux/Linux程序设计/09_开发工具.md)
+      - [11 进程和信号](实用技术/Linux/Linux程序设计/11_进程和信号.md)
+      - [13 进程间的通信：管道](实用技术/Linux/Linux程序设计/13_进程间的通信：管道.md)
+      - [15 套接字](实用技术/Linux/Linux程序设计/15_套接字.md)
     - vim
   - 深入理解Nginx
   - WebSocket
