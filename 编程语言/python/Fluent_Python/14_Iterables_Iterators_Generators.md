@@ -274,7 +274,7 @@ class Sentence:
             yield match.group()
 ```
 
-## Sentence Take #5: A Generator Expression
+## 14.6 Sentence Take #5: A Generator Expression
 
 `generator expression`可以理解为`list comprehension`的lazy版本。
 
@@ -325,11 +325,11 @@ class Sentence:
         return (match.group() for match in RE_WORD.finditer(self.text))
 ```
 
-## Generator Expression: When to Use Them
+## 14.7 Generator Expression: When to Use Them
 
 `generator expression`一般是one use，要重复使用，或者内部逻辑比较复杂，则用`generator function`
 
-## Another Example: Arithmetic Progression Generator
+## 14.8 Another Example: Arithmetic Progression Generator
 
 前面那我们对生成器的用法是把其作为遍历数据的iterator来使用（生成器本身是一种特殊的迭代器，yield是一个语法糖，内部实现支持了迭代器协议）
 
@@ -373,4 +373,49 @@ if __name__ == '__main__':
 # ... 到无限
 ```
 
-## Generator Functions in the Standard Library
+## 14.9 Generator Functions in the Standard Library
+
+待记
+
+## 14.10 New Syntax in Python 3.3: yield from
+
+直接来看一个例子，下面chain1和chain2的结果一样
+
+```python
+def chain1(*iterables):
+    for iterable in iterables:
+        for i in iterable:
+            yield i
+
+def chain2(*iterables):
+    for iterable in iterables:
+        yield from iterable
+
+s = 'ABC'
+t = tuple(range(3))
+
+print(list(chain1(s, t)))   # ['A', 'B', 'C', 0, 1, 2]
+print(list(chain2(s, t)))   # ['A', 'B', 'C', 0, 1, 2]
+```
+
+这样看起来`yield from`像是一个语法糖。但不是这样的！`yield from`还创造一个内部generator和外部generator之间的管道。这在协程中非常有用。
+
+## 14.11 Iterable Reducing Functions
+
+## 14.12 A Closer Look at the iter Function
+
+## 14.13 Case Study: Generators in a Database Conversion Utility
+
+## 14.14 Generators as Coroutines
+
+当generator用send()时，变成了coroutine。注意，next()是从generator中获取数据，而send()是向yield表达式发送数据。方向正好相反。
+
+注意`David Beazley`的几点建议：
+
+- Generators produce data ofr iteration
+- Coroutines are consumers of data
+- To keep your brain from exploding, you don't mix the two concept together.
+- Coroutines are not related to iteration.
+- Note: There is a use of having yield produce a value in a coroutine, but it's not tied to iteration.s
+
+
