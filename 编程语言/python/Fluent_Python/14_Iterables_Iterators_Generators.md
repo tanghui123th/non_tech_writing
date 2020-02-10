@@ -246,3 +246,81 @@ if __name__ == '__main__':
 ```
 
 输出同前面一样。
+
+## 14.5 Sentence Take #4: A Lazy Implementation
+
+Iterator按照设计应该是lazy的。与lazy相反的是eager。之前我们对Sentence的实现都是eager的，因为我们再`__init__`中把所有的words都在list中存好了。
+
+re.finditer会返回一个generator。这个generator生成一个`re.MatechObject`对象。这个对象的`group()`方法返回实际匹配的字符串。
+
+```python
+import re
+import reprlib
+from collections import abc
+
+RE_WORD = re.compile('\w+')
+
+
+class Sentence:
+
+    def __init__(self, text):
+        self.text = text
+
+    def __repr__(self):
+        return 'Sentence(%s)' % reprlib.repr(self.text)
+
+    def __iter__(self):
+        for match in RE_WORD.finditer(self.text):
+            yield match.group()
+```
+
+## Sentence Take #5: A Generator Expression
+
+`generator expression`可以理解为`list comprehension`的lazy版本。
+
+```python
+>>> def gen_AB():
+...     print('start')
+...     yield 'A'
+...     print('continue')
+...     yield 'B'
+...     print('en。d')
+... 
+>>> res1 = [x*3 for x in gen_AB()]
+start
+continue
+end
+>>> for i in res1:
+...     print('-->', i)
+... 
+--> AAA
+--> BBB
+>>> res2 = (x*3 for x in gen_AB())
+>>> for i in res2:
+...     print('-->', i)
+... 
+start
+--> AAA
+continue
+--> BBB
+end
+```
+
+只有当for遍历res2时，gen_AB()才会被执行到。（for会调用next(res2)）
+
+注意`generator expression`实际上是`generator function`的语法糖。
+
+使用生成器表达式，前面的Sentence可以这样实现：
+
+```python
+class Sentence:
+    
+    def __init__(self, text):
+        self.text = text
+        
+    def __repr__(self):
+        return 'Sentence(%s)' % replib.repr(self.text)
+    
+    def __iter__(self):
+        return (match.group() for match in RE_WORD.finditer(self.text))
+```
