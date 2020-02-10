@@ -100,7 +100,7 @@ C
 
 iterator需要实现两个特殊方法`__next__`和`__iter__`，其中`__iter__`返回self。与iterable的类型判断不同，判断iterator对象可以直接用`isinstance(x, abc.Iterator)`或者issubclass
 
-## 14.3 Sentence Take #2: A Classic Interior
+## 14.3 Sentence Take #2: A Classic Interator
 
 现在用`__iter__`重新实现Sentence。这个例子可以更好的帮我们理解iterable和iterator的关系
 
@@ -324,3 +324,53 @@ class Sentence:
     def __iter__(self):
         return (match.group() for match in RE_WORD.finditer(self.text))
 ```
+
+## Generator Expression: When to Use Them
+
+`generator expression`一般是one use，要重复使用，或者内部逻辑比较复杂，则用`generator function`
+
+## Another Example: Arithmetic Progression Generator
+
+前面那我们对生成器的用法是把其作为遍历数据的iterator来使用（生成器本身是一种特殊的迭代器，yield是一个语法糖，内部实现支持了迭代器协议）
+
+现在我们使用generator来实现一个算数级数
+
+```python
+class ArithmeticProgression:
+
+    def __init__(self, begin, step, end=None):
+        self.begin = begin
+        self.step = step
+        self.end = end
+
+    def __iter__(self):
+        result = type(self.begin+self.step)(self.begin)
+        index = 0
+        while self.end is None or result < self.end:
+            yield result
+            index += 1
+            result = self.begin + self.step * index
+
+if __name__ == '__main__':
+    ap = ArithmeticProgression(0, 1, 3)
+    print(list(ap))
+    ap = ArithmeticProgression(0, 1/3, 2)
+    print(list(ap))
+    ap = ArithmeticProgression(0, 1)
+    for i in ap:
+        print(i)
+```
+
+输出
+
+```python
+[0, 1, 2]
+[0.0, 0.3333333333333333, 0.6666666666666666, 1.0, 1.3333333333333333, 1.6666666666666665]
+0
+1
+2
+3
+# ... 到无限
+```
+
+## Generator Functions in the Standard Library
