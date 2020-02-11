@@ -87,6 +87,8 @@
       - [06 第一类函数的设计模式](编程语言/python/Fluent_Python/06_第一类函数的设计模式.md)
       - [08 对象引用 可变性 回收](编程语言/python/Fluent_Python/08_对象引用_可变性_回收.md)
       - [14 Iterables Iterators Generators](编程语言/python/Fluent_Python/14_Iterables_Iterators_Generators.md)
+      - [16 Coroutines](编程语言/python/Fluent_Python/16_Coroutines.md)
+      - [17 Concurrency with Futures](编程语言/python/Fluent_Python/17_Concurrency_with_Futures.md)
     - 简单总结
       - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
       - [02 标准库](编程语言/python/简单总结/02_标准库.md)
