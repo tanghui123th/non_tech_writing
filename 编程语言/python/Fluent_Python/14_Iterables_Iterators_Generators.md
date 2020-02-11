@@ -416,6 +416,4 @@ print(list(chain2(s, t)))   # ['A', 'B', 'C', 0, 1, 2]
 - Coroutines are consumers of data
 - To keep your brain from exploding, you don't mix the two concept together.
 - Coroutines are not related to iteration.
-- Note: There is a use of having yield produce a value in a coroutine, but it's not tied to iteration.s
-
-
+- Note: There is a use of having yield produce a value in a coroutine, but it's not tied to iteration.
