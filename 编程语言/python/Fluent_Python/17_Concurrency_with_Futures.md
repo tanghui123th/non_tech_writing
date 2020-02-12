@@ -111,3 +111,4 @@ BR FR JP NG ID BG IN CN EG DE IR PH VN RU PK MX TR ET US CD
 ```
 
 download_one就是第一个版本中的一个for loop。把一个for loop写成一个函数，再并发调用这个函数。这是重构代码实现并发的技巧。
+
