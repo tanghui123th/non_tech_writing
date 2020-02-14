@@ -164,6 +164,14 @@ US <Future at 0x1052138d0 state=finished returned str> result: 'US'
 
 ## 17.2 Blocking I/O and the GIL
 
-注意由于GIL的存在，python中concurrent和asyncio都不能并行。多线程的意义就在于：如果遇到了IO阻塞，则切换到其他线程。
+注意由于GIL的存在，python中concurrent和asyncio的多线程都不能并行。多线程的意义就在于：如果遇到了IO阻塞，则切换到其他线程。
 
+## 17.3 Launching Processes with concurrent.futures
 
+ThreadPoolExecutor是多线程，ProcessPoolExecutor则是多进程。如果有多核，则使用ProcessPoolExecutor可以实现真正的并行（parallel）。
+
+ThreadPoolExecutor有一个max_workers参数，ProcessPoolExecutor则没有这个参数，而是使用os.cpu_count()返回的个数来开启进程。
+
+对于CPU密集型的程序，ProcessPoolExecutor可以有效利用多核进行并行的运算。对于IO密集型的程序，用ThreadPoolExecutor就行了。
+
+## 17.4 Experimenting with Executor.map

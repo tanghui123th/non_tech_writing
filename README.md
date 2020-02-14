@@ -89,6 +89,7 @@
       - [14 Iterables Iterators Generators](编程语言/python/Fluent_Python/14_Iterables_Iterators_Generators.md)
       - [16 Coroutines](编程语言/python/Fluent_Python/16_Coroutines.md)
       - [17 Concurrency with Futures](编程语言/python/Fluent_Python/17_Concurrency_with_Futures.md)
+      - [18 Concurrency with asyncio](编程语言/python/Fluent_Python/18_Concurrency_with_asyncio.md)
     - 简单总结
       - [01 基础语法](编程语言/python/简单总结/01_基础语法.md)
       - [02 标准库](编程语言/python/简单总结/02_标准库.md)
