@@ -100,7 +100,7 @@ C
 
 iterator需要实现两个特殊方法`__next__`和`__iter__`，其中`__iter__`返回self。与iterable的类型判断不同，判断iterator对象可以直接用`isinstance(x, abc.Iterator)`或者issubclass
 
-## 14.3 Sentence Take #2: A Classic Interator
+## 14.3 Sentence Take #2: A Classic Iterator
 
 现在用`__iter__`重新实现Sentence。这个例子可以更好的帮我们理解iterable和iterator的关系
 
