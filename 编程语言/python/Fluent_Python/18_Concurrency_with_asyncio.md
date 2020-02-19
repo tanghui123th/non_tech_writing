@@ -74,7 +74,9 @@ Answer: 42
 
 ### asyncio version
 
-注意这里的语法和书上的有些出入，主要是`@asyncio.coroutine`换成了`async`，`yield from`换成了`await`。`create_task()`会创建一个Task并run
+注意这里的语法和书上的有些出入，主要是`@asyncio.coroutine`换成了`async`，`yield from`换成了`await`。`create_task()`会创建一个Task并run。
+
+注意`asyncio.sleep`和`time.sleep`的区别，前者是不会阻塞的，后者会阻塞整个进程（而async是单进程的）。
 
 ```python
 import asyncio
@@ -126,3 +128,13 @@ if __name__ == '__main__':
 spinner object: <Task pending coro=<spin() running at spinner_asyncio.py:6>>
 Answer: 42 
 ```
+
+### asyncio协程和线程的比较
+
+- `asyncio.Task`和`threading.Thread`在功能上大体相当
+- A Task drives a coroutine, a Thread invokes a callable.
+- 不手动实例化Task对象，而是用asyncio相关的方法。
+- 如果get一个Task对象，那这个对象一定是在run的。而Thread对象必须手动调用start方法来run
+- 没有从外部终止线程的api，而`Task.cancel()`可以终止协程。在协程内部yield的地方触发`CancelldError`异常。
+
+### asyncio.Future: Nonblocking by Design
