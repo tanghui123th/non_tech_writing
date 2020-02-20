@@ -375,19 +375,37 @@ if __name__ == '__main__':
 
 ## 14.9 Generator Functions in the Standard Library
 
-os.walk就是一个`generator function`，但这里不介绍。
+os.walk就是一个`generator function`，但这里不介绍。注意一下都是生成器函数，都`yield item`，而不是`return item`
 
 ```python
 def vowel(c):
     return c.lower() in 'aeiou'
 
 if __name__ == '__main__':
+
     print(list(filter(vowel, 'Aardvark')))
+
+    # ['A', 'a', 'a']
     import itertools
     print(list(itertools.filterfalse(vowel, 'Aardvark')))
+    # ['r', 'd', 'v', 'r', 'k']              和filter正好相反
+
+    print(list(itertools.dropwhile(vowel, 'Aardvark')))
+    # ['r', 'd', 'v', 'a', 'r', 'k']         true的skip，一旦遇到一个false，后面的都yield出来
+    print(list(itertools.takewhile(vowel, 'Aardvark')))
+    # ['A', 'a'] 和dropwhile正好相反
+
+    print(list(itertools.compress('Aardvark', (1,0,1,0,1))))
+    # ['A', 'r', 'v']   # 即返回第二个参数中为true的item对应的第一个参数的item
+
+    print(list(itertools.islice('Aardvark', 4)))
+    # ['A', 'a', 'r', 'd'] 就是切片
+
+    print(list(itertools.islice('Aardvark', 4, 7)))
+    # ['v', 'a', 'r']
 ```
 
-未完
+这里介绍了`filter`类的生成器函数，除此之外还有`mapping`，`merging`类的等
 
 ## 14.10 New Syntax in Python 3.3: yield from
 
@@ -414,9 +432,35 @@ print(list(chain2(s, t)))   # ['A', 'B', 'C', 0, 1, 2]
 
 ## 14.11 Iterable Reducing Functions
 
+略
+
 ## 14.12 A Closer Look at the iter Function
 
+iter作为一个内建函数，本身还支持另一种用法。
+
+- 第一个参数是一个函数，不断被调用，并yield一个值
+- 第二个参数是一个哨兵，当第一个参数yield的值等于这个哨兵时。引发`StopIteration`。
+
+```python
+>>> def d6():
+...     return randint(1,6)
+... 
+>>> d6_iter = iter(d6,1)
+>>> d6_iter
+<callable_iterator object at 0x1006b2d10>
+>>> for roll in d6_iter:
+...     print(roll)
+... 
+3
+5
+5
+```
+
+注意最后结果作为1的哨兵并不包括在内
+
 ## 14.13 Case Study: Generators in a Database Conversion Utility
+
+略
 
 ## 14.14 Generators as Coroutines
 
