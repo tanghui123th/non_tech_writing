@@ -375,7 +375,19 @@ if __name__ == '__main__':
 
 ## 14.9 Generator Functions in the Standard Library
 
-待记
+os.walk就是一个`generator function`，但这里不介绍。
+
+```python
+def vowel(c):
+    return c.lower() in 'aeiou'
+
+if __name__ == '__main__':
+    print(list(filter(vowel, 'Aardvark')))
+    import itertools
+    print(list(itertools.filterfalse(vowel, 'Aardvark')))
+```
+
+未完
 
 ## 14.10 New Syntax in Python 3.3: yield from
 
