@@ -122,3 +122,22 @@ xhr.send(null);
 ## 21.4 跨域资源共享
 
 现代浏览器XHR大多都实现了对CORS的原生支持，见[01 跨域请求](../../../实用技术/web开发常见问题/01_跨域请求.md)。
+
+## 21.5 其他跨域技术
+
+### 图像ping
+
+一个网页可以从任何网站加载图像，而不用担心跨域。请求从设置src属性的那一时刻开始。
+
+```js
+let img = new Image();
+img.onload = img.onerror = function() {
+  alert("Done");
+};
+img.src = "http://some.host.com";
+```
+
+图像Ping的两个主要缺点：
+
+- 只能发送GET请求
+- 无法访问服务器的响应文本
