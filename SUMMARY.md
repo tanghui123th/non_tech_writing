@@ -75,6 +75,7 @@
   - python
     - Fluent Python
       - [01 Python数据模型](编程语言/python/Fluent_Python/01_Python数据模型.md)
+      - [02 An Array of Sequences](编程语言/python/Fluent_Python/02_An_Array_of_Sequences.md)
       - [05 First-Class Functions](编程语言/python/Fluent_Python/05_First-Class_Functions.md)
       - [06 第一类函数的设计模式](编程语言/python/Fluent_Python/06_第一类函数的设计模式.md)
       - [08 对象引用 可变性 回收](编程语言/python/Fluent_Python/08_对象引用_可变性_回收.md)
