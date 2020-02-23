@@ -87,3 +87,20 @@ Tuple其实有两种职能，而第二种往往被忽略：
 
 ## 2.4 Slicing
 
+切片是python中所有序列的共有的最重要的一个操作。
+
+### Why Slices and Range Exclude the Last Item
+
+- 能一眼看到长度，如`range(3)`, `my_list[:3]`
+- 能一眼计算出长度`stop - start`
+- 能很好的拆分序列且不重叠，不遗漏
+
+```python
+>>> l = [10,20,30,40,50]
+>>> l[:2]
+[10, 20]
+>>> l[2:]
+[30, 40, 50]
+```
+
+以上三个优势在所有`zero-based`的语言的序列中都存在。
