@@ -1,5 +1,3 @@
-# Table of contents
-
 - [READMD](README.md)
 - 编程语言
   - c
@@ -18,6 +16,8 @@
       - [14 预处理器](编程语言/c/c和指针/14_预处理器.md)
       - [15 输入输出函数](编程语言/c/c和指针/15_输入输出函数.md)
       - [16 标准库函数](编程语言/c/c和指针/16_标准库函数.md)
+    - mini projects
+      - [pwd](编程语言/c/mini_projects/pwd.md)
   - cpp
     - 简单总结
       - [01 c基础之字符串](编程语言/cpp/简单总结/01_c基础之字符串.md)
