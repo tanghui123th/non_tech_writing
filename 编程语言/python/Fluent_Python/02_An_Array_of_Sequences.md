@@ -104,3 +104,24 @@ Tuple其实有两种职能，而第二种往往被忽略：
 ```
 
 以上三个优势在所有`zero-based`的语言的序列中都存在。
+
+### Slice Objects
+
+`seq[start:stop:step]`实际上会被解释器翻译为`seq.__getitem__(slice(start, stop, step))`。
+
+我们当然可以直接构造一个slice对象，然后作用于一个序列。
+
+```python
+>>> FIRST_3 = slice(0,3)
+>>> l = [1,2,3,4,5]
+>>> l[FIRST_3]
+[1, 2, 3]
+```
+
+### Multidimensional Slicing and Ellipsis
+
+在numpy中可以使用多维切片，如`a[m:n, k:l]`。但内建的python序列都是一维的，不能这样用。
+
+`...`是ellipsis类的唯一实例。可以用作函数或切片的参数。例如，对于numpy中的一个四维数组，`x[i, ...]`相当于`x[i, :, :, :,]`
+
+### Assigning to Slices
