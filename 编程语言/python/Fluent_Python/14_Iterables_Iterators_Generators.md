@@ -468,7 +468,7 @@ iter作为一个内建函数，本身还支持另一种用法。
 
 注意`David Beazley`的几点建议：
 
-- Generators produce data ofr iteration
+- Generators produce data for iteration
 - Coroutines are consumers of data
 - To keep your brain from exploding, you don't mix the two concept together.
 - Coroutines are not related to iteration.
