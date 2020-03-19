@@ -64,7 +64,9 @@ public:
     // 析构函数
     ~Vector() { delete [] _elem; }
 
-    // 只读访问接口，find是无需查找，search是有序查找
+    // 只读访问接口，
+    // find是无需查找，查找等于e且秩最大的元素
+    // search是有序查找，查找小于等于e，且秩最大的元素
     Rank size() const
     {
         return _size;
