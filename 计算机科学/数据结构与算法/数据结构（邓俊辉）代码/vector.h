@@ -80,7 +80,7 @@ public:
     {
         return find(e, 0, _size);
     }
-    Rank find(T const& e, Rank lo, Rank hi);
+    Rank find(T const& e, Rank lo, Rank hi) const;
 
     Rank search(T const& e)
     {
@@ -136,6 +136,29 @@ void Vector<T>::copyFrom(T const* A, Rank lo, Rank hi)
 }
 
 template<typename T>
+T& Vector<T>::operator[] (Rank r)
+{
+    // assert: 0 <= r < _size
+    return _elem[r];
+}
+
+template<typename T>
+const T& Vector<T>::operator[] (Rank r) const
+{
+    // assert: 0 <= r < _size
+    return _elem[r];
+}
+
+template<typename T>
+Vector<T>& Vector<T>::operator= (Vector<T> const& V)
+{
+    if (_elem)
+        delete [] _elem;
+    copyFrom(V._elem, 0, V._size);
+    return *this;
+}
+
+template<typename T>
 void Vector<T>::expand()
 {
     if (_size < _capacity)
@@ -177,4 +200,50 @@ Rank Vector<T>::find(T const& e, Rank lo, Rank hi) const
     // assert: 0 <= lo < hi <= _size
     while ((lo < hi--) && e != _elem[hi]);  // 从后往前找，[lo,hi)是左闭右开的
     return hi;                              // 失败时，返回lo - 1
+}
+
+template<typename T>
+Rank Vector<T>::insert(Rank r, T const& e)
+{
+    // assert: 0 <= r <= size
+    expand();           // 如有必要，则扩容
+    for (int i = _size; i > r; --i)
+        _elem[i] = _elem[i-1];
+    _elem[r] = e;
+    ++_size;
+    return r;
+}
+
+template<typename T>
+int Vector<T>::remove(Rank lo, Rank hi)
+{
+    if (lo == hi)
+        return 0;
+
+    while (hi < _size)
+        _elem[lo++] = _elem[hi++];
+    _size = lo;  // 更新规模，直接丢弃尾部[lo, _size = hi)区间
+    shrink();    // 若有必要，则缩容
+    return hi - lo;
+}
+
+template<typename T>
+T Vector<T>::remove(Rank r)
+{
+    T e = _elem[r];
+    remove(r, r + 1);
+    return e;
+}
+
+template<typename T>
+int Vector<T>::deduplicate()
+{
+    int oldSize = _size;
+    Rank i = 1;
+
+    // 在_elem[i]的前缀中找到与_elem[i]相同的元素，则删除当前_elem[i]元素
+    while (i < _size)
+        (find(_elem[i], 0, i) < 0) ? i++ : remove(i);
+
+    return oldSize - _size;
 }
