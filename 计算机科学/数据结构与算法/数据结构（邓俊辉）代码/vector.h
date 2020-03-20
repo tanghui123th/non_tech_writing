@@ -134,3 +134,47 @@ void Vector<T>::copyFrom(T const* A, Rank lo, Rank hi)
     while (lo < hi)
         _elem[_size++] = A[lo++];
 }
+
+template<typename T>
+void Vector<T>::expand()
+{
+    if (_size < _capacity)
+        return;
+
+    if (_capacity < DEFAULT_CAPACITY)
+        _capacity = DEFAULT_CAPACITY;
+
+    T* oldElem = _elem;
+    _elem = new T[_capacity <<= 1];  // 容量加倍
+    for (int i = 0; i < _size; ++i)
+        _elem = oldElem;
+
+    delete [] oldElem;
+}
+
+template<typename T>
+void Vector<T>::shrink()
+{
+    if (_capacity < DEFAULT_CAPACITY << 1)
+        return;     //不致收缩到DEFAULT_CAPACITY以下。即_capacity >= 2 * DEFAULT_CAPACITY，才缩容
+
+    // 即保证4 * size <= capacity。即装填因子在25%一下，才缩容
+    if (_size << 2 > _capacity)
+        return;
+
+    T* oldElem = _elem;
+    _elem = new T[_capacity >>= 1];
+
+    for (int i = 0; i < _size; ++i)
+        _elem[i] = oldElem[i];
+
+    delete [] oldElem;
+}
+
+template<typename T>
+Rank Vector<T>::find(T const& e, Rank lo, Rank hi) const
+{
+    // assert: 0 <= lo < hi <= _size
+    while ((lo < hi--) && e != _elem[hi]);  // 从后往前找，[lo,hi)是左闭右开的
+    return hi;                              // 失败时，返回lo - 1
+}
