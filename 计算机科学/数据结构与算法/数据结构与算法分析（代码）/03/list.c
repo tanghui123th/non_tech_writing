@@ -33,6 +33,7 @@ Position Find(ElementType X, List L)
 
 Position FindPrevious(ElementType X, List L)
 {
+    /* return last element if x is not found */
     Position P;
 
     P = L;
@@ -47,7 +48,10 @@ void Insert(ElementType X, List L, Position P)
 
     TmpCell = malloc(sizeof(struct Node));
     if (TmpCell == NULL)
-        printf("")
+        printf("error in %s: %s, Out of space!!!", __FILE__, __FUNCTION__);
+    TmpCell->Element = X;
+    TmpCell->Next = P->Next;
+    P->Next = TmpCell;
 }
 
 void Delete(ElementType X, List L)
@@ -62,5 +66,17 @@ void Delete(ElementType X, List L)
         TmpCell = P->Next;
         P->Next = TmpCell->Next;
         free(TmpCell);
+    }
+}
+
+void DeleteList(List L)
+{
+    Position P, Tmp;
+
+    P = L->Next;
+    while (P != NULL) {
+        Tmp = P->Next;
+        free(P);
+        P = Tmp;
     }
 }
