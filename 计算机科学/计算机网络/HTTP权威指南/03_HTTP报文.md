@@ -104,3 +104,70 @@ Content-length: 0
 |MKCOL|允许用户创建资源|
 |COPY|复制资源|
 |MOVE|移动资源|
+
+## 3.5 首部
+
+五种类型：
+
+- 通用首部
+- 请求首部
+- 响应首部
+- 实体首部
+- 扩展首部
+
+### 通用首部
+
+|首部|描述|
+|-|-|
+|Connection||
+|Date|报文的创建时间
+|Via|显示报文经过的中间节点（代理、网关）|
+|MIME-Version||
+|Trailer||
+|Transfer-Encoding||
+|Update||
+|Cache-Control||
+
+### 请求首部
+
+##### 请求的信息性首部
+
+|首部|描述|
+|-|-|
+|Client-IP|客户端机器IP|
+|From|客户端用户的Email地址|
+|Host|服务器的主机名和端口号，如223.1.2.123:8000|
+|Referer|即引荐人的意思，可以参考http://www.ruanyifeng.com/blog/2019/06/http-referer.html|
+|User-Agent|发起请求的程序名|
+|UA-XXX|根据XXX来提供客户端机器的一些信息|
+
+##### Accept首部
+
+|首部|描述|
+|-|-|
+|Accept|告诉服务器发送哪些媒体类型|
+|Accept-Charset||
+|Accept-Encoding||
+|Accept-Language||
+
+##### 条件请求首部
+
+- Expect
+- If-Match
+- If-Modifie-Since
+- If-None-Match
+- If-Range
+- If-Unmodified-Since
+- Range
+
+##### 安全请求首部
+
+- Authorization
+- Cookie
+- Cookie2
+
+##### 代理请求首部
+
+- Max-Forward
+- Proxy-Authorization
+- Proxy-Connection
